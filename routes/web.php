@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SignUpController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::post('/customer-signup', [SignUpController::class, 'customerSignup']);
