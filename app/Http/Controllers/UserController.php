@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use App\Helper\JWTToken;
+
 
 class UserController extends Controller
 {
@@ -29,40 +31,42 @@ class UserController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'User created successfully'
+                'message' => 'User Created successfully'
             ], 201);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'User creation failed'
+                'message' => 'Failed to Create User'
             ], 500);
         }
     }
 
     public function customerLogin(Request $request)
     {
-        $username = $request->input('username');
         $email = $request->input('email');
         $password = $request->input('password');
 
         try {
             $customer = Customer::where('email', $email)->first();
-            $hashed_password = $customer->password;
 
-            if (Hash::check($password, $hashed_password)) {
-                $customer_email = $email;
-                $token = JWTToken::createToken($customer_id, $customer_email);
+            if (!Hash::check($password, $customer->password)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid Credentials'
+                ], 401);
             }
+
+            $token = JWTToken::createToken($customer->id, $customer->email);
 
             return response()->json([
                 'success' => true,
-                'message' => 'User logged in successfully'
-            ], 200);
+                'message' => 'User Logged in Successfully',
+            ], 200)->cookie('token', $token, 24 * 60 * 60);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'User login failed'
-            ], 200);
+                'message' => 'User Login Failed'
+            ], 500);
         }
     }
 }
