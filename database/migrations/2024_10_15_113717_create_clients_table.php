@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('cust_id');
             $table->string('fullname', 255);
             $table->string('email', 255)->unique();
-            $table->string('phone', 15)->unique();
             $table->string('company', 255)->nullable();
             $table->string('country', 255);
             $table->timestamps();
