@@ -11,3 +11,4 @@ Route::post('/customer-login', [UserController::class, 'customerLogin']);
 Route::post('/create-client', [ClientController::class, 'createClient']);
 Route::post('/update-client', [ClientController::class, 'updateClient']);
 Route::post('/delete-client', [ClientController::class, 'deleteClient']);
+Route::get('/get-clients', [ClientController::class, 'getClients']);

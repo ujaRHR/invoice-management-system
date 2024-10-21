@@ -77,4 +77,24 @@ class ClientController extends Controller
             ], 500);
         }
     }
+
+    public function getClients(Request $request)
+    {
+        $cust_id = $request->input('cust_id');
+
+        $clients = Client::where('cust_id', $cust_id)->get();
+
+        if ($clients) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Clients Fetched Successfully',
+                'clients' => $clients
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to Fetch Clients'
+            ]);
+        }
+    }
 }
