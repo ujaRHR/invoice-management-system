@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cust_id');
-            $table->string('service_name', 255);
+            $table->string('service_name', 255)->unique();
             $table->decimal('base_price', 10, 2);
             $table->timestamps();
 

@@ -5,28 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use Exception;
-use Illuminate\Http\JsonResponse;
 
 class ClientController extends Controller
 {
     public function createClient(Request $request)
     {
-        try {
-            $validatedData = $request->validate([
-                'cust_id' => 'required',
-                'fullname' => 'required|string|max:255',
-                'email'    => 'required|email|max:100',
-                'company'  => 'nullable|string|max:255',
-                'country'  => 'required|string|max:100',
-            ]);
+        $validatedData = $request->validate([
+            'cust_id' => 'required|integer',
+            'fullname' => 'required|string|max:255',
+            'email'    => 'required|email|max:100',
+            'company'  => 'nullable|string|max:255',
+            'country'  => 'required|string|max:100',
+        ]);
 
-            Client::create($validatedData);
+        $created = Client::create($validatedData);
 
+        if ($created) {
             return response()->json([
                 'success' => true,
-                'message' => 'Client Created Successfully'
+                'message' => 'Client Created Successfully',
+
             ], 201);
-        } catch (Exception $e) {
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to Create New Client'
@@ -45,14 +45,14 @@ class ClientController extends Controller
             'country'  => 'required|string|max:100',
         ]);
 
-        try {
-            Client::where('id', $client_id)->update($validatedData);
+        $updated = Client::where('id', $client_id)->update($validatedData);
 
+        if ($updated) {
             return response()->json([
                 'success' => true,
-                'message' => 'User updated successfully',
+                'message' => 'User updated successfully'
             ], 200);
-        } catch (Exception $e) {
+        } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to update the user'
