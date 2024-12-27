@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentMethodController;
 
 Route::post('/customer-signup', [UserController::class, 'customerSignup']);
 Route::post('/customer-login', [UserController::class, 'customerLogin']);
+Route::get('/get-customer', [UserController::class, 'getCustomer']);
 
 Route::post('/create-client', [ClientController::class, 'createClient']);
 Route::post('/update-client', [ClientController::class, 'updateClient']);

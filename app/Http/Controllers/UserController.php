@@ -70,5 +70,25 @@ class UserController extends Controller
         }
     }
 
-    
+    public function getCustomers(Request $request)
+    {
+        $cust_id = $request->input('cust_id');
+
+        $customer = Customer::select('username', 'fullname', 'email', 'user_type', 'phone', 'address', 'country', 'language', 'is_verified', 'created_at')
+            ->where('id', $cust_id)
+            ->get();
+
+        if ($customer->isNotEmpty()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Customer information fetched successfully',
+                'customers' => $customer,
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'No customer information was fetched',
+            ], 404);
+        }
+    }
 }
