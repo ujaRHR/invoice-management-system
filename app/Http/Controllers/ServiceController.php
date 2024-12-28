@@ -28,12 +28,12 @@ class ServiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to create new service',
-                ], 400);
+                ], 404);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to create new service',
+                'message' => 'something went wrong',
             ], 400);
         }
     }
@@ -64,7 +64,7 @@ class ServiceController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to update the service',
+                'message' => 'something went wrong',
             ], 400);
         }
     }
@@ -90,7 +90,7 @@ class ServiceController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to delete the service',
+                'message' => 'something went wrong',
             ], 400);
         }
     }
@@ -111,13 +111,40 @@ class ServiceController extends Controller
             } else {
                 return response()->json([
                     'success' => false,
-                    'message' => 'No services found',
-                ], 400);
+                    'message' => 'No services were found',
+                ], 404);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'No services found',
+                'message' => 'something went wrong',
+            ], 400);
+        }
+    }
+
+    public function serviceInfo(Request $request)
+    {
+        $service_id = $request->input('id');
+
+        try {
+            $service = Service::where('id', $service_id)->first();
+
+            if ($service) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'service fetched successfully',
+                    'service' => $service,
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'no service was found',
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'something went wrong',
             ], 400);
         }
     }

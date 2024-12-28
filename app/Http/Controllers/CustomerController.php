@@ -31,12 +31,12 @@ class CustomerController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'User Created successfully'
-            ], 201);
+                'message' => 'customer created successfully'
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to Create User'
+                'message' => 'something went wrong'
             ], 400);
         }
     }
@@ -60,12 +60,12 @@ class CustomerController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'User Logged in Successfully',
+                'message' => 'customer logged in successfully',
             ], 200)->cookie('token', $token, 24 * 60 * 60);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'User Login Failed'
+                'message' => 'customer login failed'
             ], 400);
         }
     }
@@ -74,20 +74,27 @@ class CustomerController extends Controller
     {
         $cust_id = $request->input('cust_id');
 
-        $customer = Customer::select('username', 'fullname', 'email', 'user_type', 'phone', 'address', 'country', 'language', 'is_verified', 'created_at')
-            ->where('id', $cust_id)
-            ->get();
+        try {
+            $customer = Customer::select('username', 'fullname', 'email', 'user_type', 'phone', 'address', 'country', 'language', 'is_verified', 'created_at')
+                ->where('id', $cust_id)
+                ->first();
 
-        if ($customer->isNotEmpty()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Customer information fetched successfully',
-                'customer' => $customer,
-            ], 200);
-        } else {
+            if ($customer) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'customer information fetched successfully',
+                    'customer' => $customer,
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'customer was not found'
+                ], 400);
+            }
+        } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'No customer information was fetched'
+                'message' => 'something went wrong'
             ], 400);
         }
     }

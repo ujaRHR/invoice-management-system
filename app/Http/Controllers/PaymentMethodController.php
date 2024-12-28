@@ -35,7 +35,7 @@ class PaymentMethodController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to add payment method',
+                'message' => 'something went wrong',
             ], 400);
         }
     }
@@ -68,7 +68,7 @@ class PaymentMethodController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to update the payment method',
+                'message' => 'something went wrong',
             ], 400);
         }
     }
@@ -94,7 +94,7 @@ class PaymentMethodController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to delete the payment method',
+                'message' => 'something went wrong',
             ], 400);
         }
     }
@@ -115,13 +115,39 @@ class PaymentMethodController extends Controller
             } else {
                 return response()->json([
                     'success' => false,
-                    'message' => 'No payment methods found',
-                ], 400);
+                    'message' => 'no payment methods found',
+                ], 404);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'No payment methods found',
+                'message' => 'something went wrong',
+            ], 400);
+        }
+    }
+
+    public function methodInfo(Request $request)
+    {
+        $method_id = $request->input('id');
+        try {
+            $method = PaymentMethod::where('id', $method_id)->first();
+
+            if ($method) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'payment methods fetched successfully',
+                    'services' => $method,
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'no payment method was found',
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'something went wrong',
             ], 400);
         }
     }

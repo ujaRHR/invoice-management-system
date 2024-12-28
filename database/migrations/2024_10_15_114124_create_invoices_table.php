@@ -24,7 +24,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->decimal('tax', 10, 2);
             $table->decimal('total_amount', 10, 2);
-            $table->enum('status', ['pending', 'paid', 'cancelled', 'seen'])->default('pending');
+            $table->enum('status', ['pending', 'paid', 'cancelled'])->default('pending');
             $table->unsignedBigInteger('payment_method');
             $table->string('notes', 255)->nullable();
             $table->timestamps();

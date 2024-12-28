@@ -19,7 +19,7 @@ class ClientController extends Controller
                 'company'  => 'nullable|string|max:255',
                 'country'  => 'required|string|max:100',
             ]);
-            
+
             $created = Client::create($validatedData);
 
             if ($created) {
@@ -125,6 +125,32 @@ class ClientController extends Controller
                 'success' => false,
                 'message' => 'failed to fetch clients'
             ]);
+        }
+    }
+
+    public function clientInfo(Request $request)
+    {
+        $client_id = $request->input('id');
+
+        try {
+            $client = Client::where('id', $client_id)->first();
+            if ($client) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'client fetched successfully',
+                    'client' => $client
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'no client was found'
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'something went wrong'
+            ], 400);
         }
     }
 }
