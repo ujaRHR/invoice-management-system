@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('cust_id');
             $table->enum('method_type', ['bank', 'paypal', 'crypto', 'card', 'others']);
             $table->string('provider', 255);
-            $table->string('account_details', 255);
+            $table->string('account_details', 255)->unique();
             $table->enum('is_default', ['yes', 'no'])->default('no');
             $table->timestamps();
 

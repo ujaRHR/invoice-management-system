@@ -9,7 +9,7 @@ use Exception;
 use App\Helper\JWTToken;
 
 
-class UserController extends Controller
+class CustomerController extends Controller
 {
     public function customerSignup(Request $request)
     {
@@ -37,7 +37,7 @@ class UserController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to Create User'
-            ], 500);
+            ], 400);
         }
     }
 
@@ -53,7 +53,7 @@ class UserController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Invalid Credentials'
-                ], 401);
+                ], 400);
             }
 
             $token = JWTToken::createToken($customer->id, $customer->email);
@@ -66,11 +66,11 @@ class UserController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'User Login Failed'
-            ], 500);
+            ], 400);
         }
     }
 
-    public function getCustomers(Request $request)
+    public function getCustomer(Request $request)
     {
         $cust_id = $request->input('cust_id');
 
@@ -82,13 +82,13 @@ class UserController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Customer information fetched successfully',
-                'customers' => $customer,
+                'customer' => $customer,
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'No customer information was fetched',
-            ], 404);
+                'message' => 'No customer information was fetched'
+            ], 400);
         }
     }
 }

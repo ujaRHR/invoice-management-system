@@ -10,24 +10,31 @@ class ServiceController extends Controller
 {
     public function createService(Request $request)
     {
-        $validatedData = $request->validate([
-            'cust_id' => 'required|integer',
-            'service_name' => 'required|string|max:255',
-            'base_price' => 'required|numeric|max:100000',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'cust_id' => 'required|integer',
+                'service_name' => 'required|string|max:255',
+                'base_price' => 'required|numeric|max:100000',
+            ]);
 
-        $created = Service::create($validatedData);
+            $created = Service::create($validatedData);
 
-        if ($created) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Service created successfully',
-            ], 201);
-        } else {
+            if ($created) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'service created successfully',
+                ], 201);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'failed to create new service',
+                ], 400);
+            }
+        } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to create new service',
-            ], 500);
+                'message' => 'failed to create new service',
+            ], 400);
         }
     }
 
@@ -35,41 +42,56 @@ class ServiceController extends Controller
     {
         $service_id = $request->input('id');
 
-        $validatedData = $request->validate([
-            'service_name' => 'required|string|max:255',
-            'base_price' => 'required|numeric|max:100000',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'service_name' => 'required|string|max:255',
+                'base_price' => 'required|numeric|max:100000',
+            ]);
 
-        $updated = Service::where('id', $service_id)->update($validatedData);
+            $updated = Service::where('id', $service_id)->update($validatedData);
 
-        if ($updated) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Service Updated Successfully',
-            ], 200);
-        } else {
+            if ($updated) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'service updated successfully',
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'failed to update the service',
+                ], 400);
+            }
+        } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to Update the Service',
-            ], 500);
+                'message' => 'failed to update the service',
+            ], 400);
         }
     }
 
     public function deleteService(Request $request)
     {
         $service_id = $request->input('id');
-        $deleted = Service::where('id', $service_id)->delete();
 
-        if ($deleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Service deleted successfully',
-            ], 200);
-        } else {
+        try {
+            $deleted = Service::where('id', $service_id)->delete();
+
+            if ($deleted) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'service deleted successfully',
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'failed to delete the service',
+                ], 400);
+            }
+        } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to delete the service',
-            ], 404);
+                'message' => 'failed to delete the service',
+            ], 400);
         }
     }
 
@@ -77,19 +99,26 @@ class ServiceController extends Controller
     {
         $cust_id = $request->input('cust_id');
 
-        $services = Service::where('cust_id', $cust_id)->get();
+        try {
+            $services = Service::where('cust_id', $cust_id)->get();
 
-        if ($services->isNotEmpty()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Services fetched successfully',
-                'services' => $services,
-            ], 200);
-        } else {
+            if ($services->isNotEmpty()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'services fetched successfully',
+                    'services' => $services,
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No services found',
+                ], 400);
+            }
+        } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'No services found',
-            ], 404);
+            ], 400);
         }
     }
 }

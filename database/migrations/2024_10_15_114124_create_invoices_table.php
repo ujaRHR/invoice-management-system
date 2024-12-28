@@ -20,10 +20,11 @@ return new class extends Migration
             $table->bigInteger('quantity');
             $table->decimal('unit_price', 10, 2);
             $table->dateTime('issue_date');
+            $table->dateTime('due_date');
             $table->decimal('amount', 10, 2);
             $table->decimal('tax', 10, 2);
             $table->decimal('total_amount', 10, 2);
-            $table->enum('status', ['pending', 'paid', 'cacelled', 'seen'])->default('pending');
+            $table->enum('status', ['pending', 'paid', 'cancelled', 'seen'])->default('pending');
             $table->unsignedBigInteger('payment_method');
             $table->string('notes', 255)->nullable();
             $table->timestamps();

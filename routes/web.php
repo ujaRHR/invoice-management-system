@@ -1,15 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\InvoiceController;
 
 
-Route::post('/customer-signup', [UserController::class, 'customerSignup']);
-Route::post('/customer-login', [UserController::class, 'customerLogin']);
-Route::get('/get-customer', [UserController::class, 'getCustomer']);
+Route::post('/customer-signup', [CustomerController::class, 'customerSignup']);
+Route::post('/customer-login', [CustomerController::class, 'customerLogin']);
+Route::get('/get-customer', [CustomerController::class, 'getCustomer']);
 
 Route::post('/create-client', [ClientController::class, 'createClient']);
 Route::post('/update-client', [ClientController::class, 'updateClient']);
@@ -25,3 +26,8 @@ Route::post('/create-method', [PaymentMethodController::class, 'createMethod']);
 Route::post('/update-method', [PaymentMethodController::class, 'updateMethod']);
 Route::post('/delete-method', [PaymentMethodController::class, 'deleteMethod']);
 Route::get('/get-methods', [PaymentMethodController::class, 'getMethods']);
+
+Route::post('/create-invoice', [InvoiceController::class, 'createInvoice']);
+Route::post('/update-invoice', [InvoiceController::class, 'updateInvoice']);
+Route::post('/delete-invoice', [InvoiceController::class, 'deleteInvoice']);
+Route::post('/get-invoice', [InvoiceController::class, 'getInvoice']);
