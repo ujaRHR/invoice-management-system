@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\DashboardController;
 
 
 Route::post('/customer-signup', [CustomerController::class, 'customerSignup']);
@@ -35,3 +36,5 @@ Route::post('/update-invoice', [InvoiceController::class, 'updateInvoice']);
 Route::post('/delete-invoice', [InvoiceController::class, 'deleteInvoice']);
 Route::get('/get-invoices', [InvoiceController::class, 'getInvoices']);
 Route::get('/invoice-info', [InvoiceController::class, 'invoiceInfo']);
+
+Route::get('/dashboard', [DashboardController::class, 'dashboardPage']);
