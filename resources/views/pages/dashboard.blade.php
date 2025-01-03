@@ -3,5 +3,5 @@
 @section('title', 'Dashboard | Invoice Management System')
 
 @section('content')
-@include('components.dashboard')
+    @include('components.dashboard')
 @endsection

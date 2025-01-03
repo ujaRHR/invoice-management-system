@@ -9,6 +9,21 @@
 </head>
 
 <body>
+    @include('components.navbar-dashboard')
+    @include('components.sidebar-dashboard')
+
+    <div class="container">
+
+        @yield('content')
+
+
+        @include('components.footer-dashboard')
+    </div>
+
+    <script src=" {{ asset('js/jquery.min.js') }} "></script>
+    <script src=" {{ asset('js/axios.min.js') }} "></script>
+    <script src="{{ asset('js/sidebar.min.js') }}"></script>
+    @stack('other-scripts')
 </body>
 
 </html>
