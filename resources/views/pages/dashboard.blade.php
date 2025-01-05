@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Dashboard | Invoice Management System')
+@section('title', 'Dashboard | DySiQ Invoice')
 
 @section('content')
     @include('components.dashboard')

@@ -22,7 +22,7 @@ class JWTToken
     {
         $key = env('JWT_SECRET');
         $payload = [
-            'iss'   => 'Invoice Management System',
+            'iss'   => 'DySiQ Invoice',
             'iat'   => time(),
             'exp'   => time() + $expiry,
             'id'    => $user_id,
