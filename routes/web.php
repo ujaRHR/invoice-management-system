@@ -7,6 +7,10 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontendController;
+
+
+Route::get('/login', [FrontendController::class, 'customerLoginPage']);
 
 
 Route::post('/customer-signup', [CustomerController::class, 'customerSignup']);
