@@ -36,7 +36,12 @@ class JWTToken
     {
         try {
             $key = env('JWT_SECRET');
-            return JWT::decode($encoded_token, new Key($key, 'HS256'));
+            if ($encoded_token) {
+                $decoded_token = JWT::decode($encoded_token, new Key($key, 'HS256'));
+                return $decoded_token;
+            } else {
+                return 'unauthorized';
+            }
         } catch (Exception $e) {
             return 'unauthorized';
         }

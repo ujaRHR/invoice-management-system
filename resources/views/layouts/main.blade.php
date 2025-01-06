@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <title>@yield('title')</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
 
@@ -37,6 +38,7 @@
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/sidebar.min.js') }}"></script>
     <script src="{{ asset('js/buttons.js') }}"></script>
     <script src="{{ asset('js/app.bundle.js') }}"></script>

@@ -49,24 +49,31 @@ class CustomerController extends Controller
         try {
             $customer = Customer::where('email', $email)->first();
 
-            if (!Hash::check($password, $customer->password)) {
+            if ($customer) {
+                if (!Hash::check($password, $customer->password)) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'invalid credentials, try again'
+                    ], 401);
+                } else {
+                    $token = JWTToken::createToken($customer->id, $customer->email);
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'customer logged in successfully',
+                    ], 200)->cookie('token', $token, 24 * 60 * 60);
+                }
+            } else {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Invalid Credentials'
-                ], 400);
+                    'message' => 'user not found!'
+                ], 401);
             }
-
-            $token = JWTToken::createToken($customer->id, $customer->email);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'customer logged in successfully',
-            ], 200)->cookie('token', $token, 24 * 60 * 60);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'customer login failed'
-            ], 400);
+                'message' => 'something went wrong!',
+            ], 500);
         }
     }
 

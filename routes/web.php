@@ -41,4 +41,4 @@ Route::post('/delete-invoice', [InvoiceController::class, 'deleteInvoice']);
 Route::get('/get-invoices', [InvoiceController::class, 'getInvoices']);
 Route::get('/invoice-info', [InvoiceController::class, 'invoiceInfo']);
 
-Route::get('/dashboard', [DashboardController::class, 'dashboardPage']);
+Route::get('/dashboard', [DashboardController::class, 'dashboardPage'])->middleware('verify');

@@ -15,7 +15,7 @@ class DashboardController extends Controller
 {
     public function dashboardPage(Request $request)
     {
-        $customer_id = $request->cookie('id');
+        $customer_id = $request->header('id');
 
         try {
             $customer = Customer::where('id', $customer_id)->first();
