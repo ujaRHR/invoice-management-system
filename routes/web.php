@@ -42,3 +42,4 @@ Route::get('/get-invoices', [InvoiceController::class, 'getInvoices']);
 Route::get('/invoice-info', [InvoiceController::class, 'invoiceInfo']);
 
 Route::get('/dashboard', [DashboardController::class, 'dashboardPage'])->middleware('verify');
+Route::get('/clients', [DashboardController::class, 'clientPage'])->middleware('verify');

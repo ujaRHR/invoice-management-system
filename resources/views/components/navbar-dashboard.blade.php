@@ -10,9 +10,8 @@
             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
           </svg>
         </button>
-        <a href=class="flex ml-2 md:mr-24">
-          <img src="" class="h-8 mr-3" alt="FlowBite Logo">
-          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+        <a href="/dashboard" class="flex ml-2 md:mr-24">
+          <img src="{{ asset('images/logo.svg') }}" class="w-[180px] mr-3" alt="DySiQ Logo">
         </a>
         <form action="#" method="GET" class="hidden lg:block lg:pl-3.5">
           <label for="topbar-search" class="sr-only">Search</label>
@@ -47,7 +46,7 @@
           </svg>
         </button>
 
-        <div class="z-20 z-50 hidden max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:divide-gray-600 dark:bg-gray-700" id="notification-dropdown" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1421px, 65px);" data-popper-placement="bottom">
+        <div class="z-20 hidden max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:divide-gray-600 dark:bg-gray-700" id="notification-dropdown" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1421px, 65px);" data-popper-placement="bottom">
           <div class="block px-4 py-2 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             Notifications
           </div>
@@ -143,7 +142,7 @@
           </svg>
         </button>
 
-        <div class="z-20 z-50 hidden max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="apps-dropdown" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1461px, 65px);" data-popper-placement="bottom">
+        <div class="z-20 hidden max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="apps-dropdown" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1461px, 65px);" data-popper-placement="bottom">
           <div class="block px-4 py-2 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             Apps
           </div>
