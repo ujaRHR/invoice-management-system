@@ -103,7 +103,7 @@ class ClientController extends Controller
 
     public function getClients(Request $request)
     {
-        $cust_id = $request->input('cust_id');
+        $cust_id = $request->header('id');
 
         try {
             $clients = Client::where('cust_id', $cust_id)->get();
