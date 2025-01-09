@@ -147,8 +147,7 @@
             `
             tableBody.append(newRow);
         });
-
-        mainTable.DataTable();
+        // mainTable.DataTable();
     }
 </script>
 @endpush
