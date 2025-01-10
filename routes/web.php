@@ -17,29 +17,29 @@ Route::post('/customer-signup', [CustomerController::class, 'customerSignup']);
 Route::post('/customer-login', [CustomerController::class, 'customerLogin']);
 Route::get('/get-customer', [CustomerController::class, 'getCustomer']);
 
-Route::post('/create-client', [ClientController::class, 'createClient']);
-Route::post('/update-client', [ClientController::class, 'updateClient']);
-Route::post('/delete-client', [ClientController::class, 'deleteClient']);
+Route::post('/create-client', [ClientController::class, 'createClient'])->middleware('verify');
+Route::post('/update-client', [ClientController::class, 'updateClient'])->middleware('verify');
+Route::post('/delete-client', [ClientController::class, 'deleteClient'])->middleware('verify');
 Route::get('/get-clients', [ClientController::class, 'getClients'])->middleware('verify');
-Route::get('/client-info', [ClientController::class, 'clientInfo']);
+Route::get('/client-info', [ClientController::class, 'clientInfo'])->middleware('verify');
 
-Route::post('/create-service', [ServiceController::class, 'createService']);
-Route::post('/update-service', [ServiceController::class, 'updateService']);
-Route::post('/delete-service', [ServiceController::class, 'deleteService']);
-Route::get('/get-services', [ServiceController::class, 'getServices']);
-Route::get('/service-info', [ServiceController::class, 'serviceInfo']);
+Route::post('/create-service', [ServiceController::class, 'createService'])->middleware('verify');
+Route::post('/update-service', [ServiceController::class, 'updateService'])->middleware('verify');
+Route::post('/delete-service', [ServiceController::class, 'deleteService'])->middleware('verify');
+Route::get('/get-services', [ServiceController::class, 'getServices'])->middleware('verify');
+Route::get('/service-info', [ServiceController::class, 'serviceInfo'])->middleware('verify');
 
-Route::post('/create-method', [PaymentMethodController::class, 'createMethod']);
-Route::post('/update-method', [PaymentMethodController::class, 'updateMethod']);
-Route::post('/delete-method', [PaymentMethodController::class, 'deleteMethod']);
-Route::get('/get-methods', [PaymentMethodController::class, 'getMethods']);
-Route::get('/method-info', [PaymentMethodController::class, 'methodInfo']);
+Route::post('/create-method', [PaymentMethodController::class, 'createMethod'])->middleware('verify');
+Route::post('/update-method', [PaymentMethodController::class, 'updateMethod'])->middleware('verify');
+Route::post('/delete-method', [PaymentMethodController::class, 'deleteMethod'])->middleware('verify');
+Route::get('/get-methods', [PaymentMethodController::class, 'getMethods'])->middleware('verify');
+Route::get('/method-info', [PaymentMethodController::class, 'methodInfo'])->middleware('verify');
 
-Route::post('/create-invoice', [InvoiceController::class, 'createInvoice']);
-Route::post('/update-invoice', [InvoiceController::class, 'updateInvoice']);
-Route::post('/delete-invoice', [InvoiceController::class, 'deleteInvoice']);
-Route::get('/get-invoices', [InvoiceController::class, 'getInvoices']);
-Route::get('/invoice-info', [InvoiceController::class, 'invoiceInfo']);
+Route::post('/create-invoice', [InvoiceController::class, 'createInvoice'])->middleware('verify');
+Route::post('/update-invoice', [InvoiceController::class, 'updateInvoice'])->middleware('verify');
+Route::post('/delete-invoice', [InvoiceController::class, 'deleteInvoice'])->middleware('verify');
+Route::get('/get-invoices', [InvoiceController::class, 'getInvoices'])->middleware('verify');
+Route::get('/invoice-info', [InvoiceController::class, 'invoiceInfo'])->middleware('verify');
 
 Route::get('/dashboard', [DashboardController::class, 'dashboardPage'])->middleware('verify');
 Route::get('/clients', [DashboardController::class, 'clientPage'])->middleware('verify');
