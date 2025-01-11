@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-<<<<<<< HEAD
-=======
     <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
->>>>>>> 91c5da3 (Updated: Clients Controller)
     <title>@yield('title')</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
 
@@ -46,12 +43,8 @@
     <script src="{{ asset('js/sidebar.min.js') }}"></script>
     <script src="{{ asset('js/buttons.js') }}"></script>
     <script src="{{ asset('js/app.bundle.js') }}"></script>
-<<<<<<< HEAD
-    <script src="{{ asset('js/datepicker.min.js')}}"></script>
-=======
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/datatables.min.js') }}"></script>
->>>>>>> 91c5da3 (Updated: Clients Controller)
     @stack('other-scripts')
 </body>
 
