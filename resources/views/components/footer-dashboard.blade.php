@@ -36,5 +36,5 @@
 </footer>
 
 <p class="my-10 text-sm text-center text-gray-500">
-  &copy; 2019-{{ date('Y') }} <a href="" class="hover:underline" target="_blank">Flowbite.com</a>. All rights reserved.
+  &copy; 2019-{{ date('Y') }} <a href="/" class="hover:underline" target="_blank">DySiQ Invoice</a>. All rights reserved.
 </p>

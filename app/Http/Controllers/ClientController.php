@@ -10,15 +10,16 @@ class ClientController extends Controller
 {
     public function createClient(Request $request)
     {
-
         try {
-            $validatedData = $request->validate([
-                'cust_id' => 'required|integer',
-                'fullname' => 'required|string|max:255',
-                'email'    => 'required|email|max:100',
-                'company'  => 'nullable|string|max:255',
-                'country'  => 'required|string|max:100',
-            ]);
+            $validatedData = $request->merge(['cust_id' => $request->header('id')])
+                ->validate([
+                    'cust_id' => 'required',
+                    'fullname' => 'required|string|max:255',
+                    'email'    => 'required|email|max:100',
+                    'company'  => 'nullable|string|max:255',
+                    'country'  => 'required|string|max:100',
+                ]);
+
 
             $created = Client::create($validatedData);
 
@@ -27,7 +28,7 @@ class ClientController extends Controller
                     'success' => true,
                     'message' => 'client created successfully',
 
-                ], 201);
+                ], 200);
             } else {
                 return response()->json([
                     'success' => false,
@@ -37,7 +38,7 @@ class ClientController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to create new client'
+                'message' => 'something went wrong!'
             ], 400);
         }
     }
@@ -70,7 +71,7 @@ class ClientController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to update the user'
+                'message' => 'something went wrong!'
             ], 400);
         }
     }
@@ -96,7 +97,7 @@ class ClientController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to delete client',
+                'message' => 'something went wrong!'
             ], 400);
         }
     }

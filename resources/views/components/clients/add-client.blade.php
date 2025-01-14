@@ -21,7 +21,7 @@
                     <div class="grid grid-cols-6 gap-6 mb-5">
                         <div class="col-span-6 sm:col-span-3">
                             <label for="full-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
-                            <input type="text" name="full-name" id="addfullName" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jonathan" required>
+                            <input type="text" name="full-name" id="addFullname" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Jonathan" required>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
@@ -294,3 +294,32 @@
         </div>
     </div>
 </div>
+
+
+@push('other-scripts')
+<script>
+    async function createClient(event) {
+        event.preventDefault();
+
+        let formData = {
+            'fullname': $('#addFullname').val(),
+            'email': $('#addEmail').val(),
+            'company': $('#addCompany').val(),
+            'country': $('#addCountry').val()
+        }
+
+        await axios.post('/create-client', formData).then(function(response) {
+            if (response.status == 200 && response.data.success == true) {
+                toastr.success("Client created successfully!");
+                mainTable.DataTable().clear().draw()
+                $('#add-client-modal').hide()
+            } else{
+                toastr.error("Something went wrong, Try again!");
+                
+            }
+        })
+    }
+
+    $('#addClientForm').on('submit', createClient);
+</script>
+@endpush
