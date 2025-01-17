@@ -117,5 +117,11 @@
         let clientId = $(this).data("id")
         $('#clientId').val(clientId)
     })
+
+    $('table tbody').on('click', '.editBtn', function() {
+        let clientId = $(this).data('id');
+        $('#updateClientId').val(clientId);
+        clientInfo()
+    })
 </script>
 @endpush
