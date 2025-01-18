@@ -21,7 +21,7 @@ Route::post('/create-client', [ClientController::class, 'createClient'])->middle
 Route::post('/update-client', [ClientController::class, 'updateClient'])->middleware('verify');
 Route::post('/delete-client', [ClientController::class, 'deleteClient'])->middleware('verify');
 Route::get('/get-clients', [ClientController::class, 'getClients'])->middleware('verify');
-Route::get('/client-info', [ClientController::class, 'clientInfo'])->middleware('verify');
+Route::post('/client-info', [ClientController::class, 'clientInfo'])->middleware('verify');
 
 Route::post('/create-service', [ServiceController::class, 'createService'])->middleware('verify');
 Route::post('/update-service', [ServiceController::class, 'updateService'])->middleware('verify');
