@@ -71,8 +71,6 @@
 
 @push('other-scripts')
 <script>
-    getClients();
-
     async function getClients() {
         let res = await axios.get('/get-clients');
         let data = res.data.clients
@@ -112,6 +110,8 @@
 
         mainTable.DataTable();
     }
+
+    getClients();
 
     $('table tbody').on('click', '.deleteBtn', function() {
         let clientId = $(this).data("id")
