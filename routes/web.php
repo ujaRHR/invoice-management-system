@@ -20,7 +20,7 @@ Route::get('/get-customer', [CustomerController::class, 'getCustomer']);
 Route::post('/create-client', [ClientController::class, 'createClient']);
 Route::post('/update-client', [ClientController::class, 'updateClient']);
 Route::post('/delete-client', [ClientController::class, 'deleteClient']);
-Route::get('/get-clients', [ClientController::class, 'getClients']);
+Route::get('/get-clients', [ClientController::class, 'getClients'])->middleware('verify');
 Route::get('/client-info', [ClientController::class, 'clientInfo']);
 
 Route::post('/create-service', [ServiceController::class, 'createService']);

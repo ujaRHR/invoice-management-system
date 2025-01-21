@@ -123,7 +123,7 @@ class ClientController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'failed to fetch clients'
+                'message' => 'something went wrong'
             ]);
         }
     }
