@@ -121,6 +121,7 @@
     $('table tbody').on('click', '.editBtn', function() {
         let clientId = $(this).data('id');
         $('#updateClientId').val(clientId);
+        $('#edit-client-modal').removeClass('hidden');
         clientInfo()
     })
 </script>
