@@ -44,7 +44,7 @@ class InvoiceController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'something went wrong'
+                'message' => 'something went wrong!'
             ], 400);
         }
     }
@@ -72,7 +72,7 @@ class InvoiceController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'something went wrong',
+                'message' => 'something went wrong!',
             ], 400);
         }
     }
@@ -98,7 +98,7 @@ class InvoiceController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'something went wrong',
+                'message' => 'something went wrong!',
             ], 400);
         }
     }
@@ -125,7 +125,7 @@ class InvoiceController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'something went wrong'
+                'message' => 'something went wrong!'
             ]);
         }
     }
@@ -152,7 +152,7 @@ class InvoiceController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'something went wrong'
+                'message' => 'something went wrong!'
             ]);
         }
     }
