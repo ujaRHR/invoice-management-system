@@ -233,7 +233,6 @@
             if (response.status == 200 && response.data.success == true) {
                 toastr.success("Client updated successfully");
                 $('#editBtnClose').click();
-                mainTable.DataTable().clear().destroy();
                 getClients();
             } else {
                 toastr.error("Something Went Wrong!");
