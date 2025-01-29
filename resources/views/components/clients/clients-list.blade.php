@@ -124,16 +124,16 @@
     }
 
     $('#dataTable').on('draw.dt', function() {
+        initModals();
         $(document).off('click').on('click', function() {
-            initModals();
             let clientId = $(this).data('id');
             $('#clientId').val(clientId);
         });
     });
 
     $('#dataTable').on('draw.dt', function() {
+        initModals();
         $('.editBtn').off('click').on('click', function() {
-            initModals();
             let clientId = $(this).data('id');
             $('#updateClientId').val(clientId);
             clientInfo();

@@ -50,7 +50,7 @@
                                 <option value="Benin">Benin</option>
                                 <option value="Bhutan">Bhutan</option>
                                 <option value="Bolivia">Bolivia</option>
-                                <option value="Bosnia and Herzegovina">Bosnia & Herzegovina</option>
+                                <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
                                 <option value="Botswana">Botswana</option>
                                 <option value="Brazil">Brazil</option>
                                 <option value="Brunei">Brunei</option>
@@ -60,7 +60,7 @@
                                 <option value="Cambodia">Cambodia</option>
                                 <option value="Cameroon">Cameroon</option>
                                 <option value="Canada">Canada</option>
-                                <option value="Central African Republic">Central African Rep.</option>
+                                <option value="Central African Rep.">Central African Rep.</option>
                                 <option value="Chad">Chad</option>
                                 <option value="Chile">Chile</option>
                                 <option value="China">China</option>
@@ -75,7 +75,7 @@
                                 <option value="Denmark">Denmark</option>
                                 <option value="Djibouti">Djibouti</option>
                                 <option value="Dominica">Dominica</option>
-                                <option value="Dominican Republic">Dominican Rep.</option>
+                                <option value="Dominican Republic">Dominican Republic</option>
                                 <option value="Ecuador">Ecuador</option>
                                 <option value="Egypt">Egypt</option>
                                 <option value="El Salvador">El Salvador</option>
@@ -175,9 +175,9 @@
                                 <option value="Turkey">Turkey</option>
                                 <option value="Uganda">Uganda</option>
                                 <option value="Ukraine">Ukraine</option>
-                                <option value="United Arab Emirates">UAE</option>
-                                <option value="United Kingdom">UK</option>
-                                <option value="United States">USA</option>
+                                <option value="United Arab Emirates">United Arab Emirates</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="United States">United States</option>
                                 <option value="Uruguay">Uruguay</option>
                                 <option value="Uzbekistan">Uzbekistan</option>
                                 <option value="Venezuela">Venezuela</option>
@@ -233,6 +233,7 @@
             if (response.status == 200 && response.data.success == true) {
                 toastr.success("Client updated successfully");
                 $('#editBtnClose').click();
+                mainTable.DataTable().clear().destroy();
                 getClients();
             } else {
                 toastr.error("Something Went Wrong!");
