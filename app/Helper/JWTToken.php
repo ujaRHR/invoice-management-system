@@ -18,7 +18,7 @@ class JWTToken
         return self::generateToken(null, $user_email, 600);
     }
 
-    private static function generateToken($user_id = null, $user_email, $expiry): string
+    private static function generateToken($user_id, $user_email, $expiry): string
     {
         $key = env('JWT_SECRET');
         $payload = [
