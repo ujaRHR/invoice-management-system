@@ -32,19 +32,27 @@
 @push('other-scripts')
 <script>
     async function deleteClient() {
-        let id = parseInt($('#clientId').val())
+        let id = parseInt($('#clientId').val());
 
-        await axios.post('/delete-client', {
-            id: id
-        }).then(function(response) {
-            if (response.status == 200 && response.data.success == true) {
+        try {
+            const response = await axios.post('/delete-client', {
+                id: id
+            });
+
+            if (response.status === 200 && response.data.success === true) {
                 toastr.success("Client deleted successfully!");
-                $('#modalCloseBtn').click();
+
+                const deleteModal = document.getElementById('delete-client-modal');
+                const deleteModalInstance = new Modal(deleteModal);
+                deleteModalInstance.hide();
+
                 getClients();
             } else {
                 toastr.error("Something went wrong, Try again!");
             }
-        })
+        } catch (error) {
+            toastr.error("An error occurred while deleting the client.");
+        }
     }
 </script>
 

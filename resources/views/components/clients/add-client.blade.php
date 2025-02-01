@@ -215,18 +215,25 @@
             'email': $('#addEmail').val(),
             'company': $('#addCompany').val(),
             'country': $('#addCountry').val()
-        }
+        };
 
-        await axios.post('/create-client', formData).then(function(response) {
-            if (response.status == 200 && response.data.success == true) {
+        try {
+            const response = await axios.post('/create-client', formData);
+
+            if (response.status === 200 && response.data.success === true) {
                 toastr.success("Client created successfully!");
-                $('#addClientBtn').click();
-                getClients()
+
+                const addModal = document.getElementById('add-client-modal');
+                const addModalInstance = new Modal(addModal);
+                addModalInstance.hide();
+
+                getClients();
             } else {
                 toastr.error("Something went wrong, Try again!");
-
             }
-        })
+        } catch (error) {
+            toastr.error("An error occurred while creating the client.");
+        }
     }
 
     $('#addClientForm').on('submit', createClient);

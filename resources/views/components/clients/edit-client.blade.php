@@ -12,7 +12,7 @@
                 </button>
             </div>
             <div class="p-6 space-y-6">
-                <form id="updateClientForm" onsubmit="updateClient(event)">
+                <form id="updateClientForm">
                     <input type="hidden" id="updateClientId" value="">
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
@@ -214,30 +214,41 @@
 
     async function updateClient(event) {
         event.preventDefault();
-        let clientId = parseInt($('#updateClientId').val())
+
+        let clientId = parseInt($('#updateClientId').val());
         let fullname = $('#updateFullname').val();
         let email = $('#updateEmail').val();
         let company = $('#updateCompany').val();
         let country = $('#updateCountry').val();
 
-
-        formData = {
+        const formData = {
             id: clientId,
             fullname: fullname,
             email: email,
             company: company,
             country: country
-        }
+        };
 
-        axios.post('/update-client', formData).then(function(response) {
-            if (response.status == 200 && response.data.success == true) {
-                toastr.success("Client updated successfully");
-                $('#editBtnClose').click();
+        try {
+            const response = await axios.post('/update-client', formData);
+
+            if (response.status === 200 && response.data.success === true) {
+                toastr.success("Client updated successfully!");
+
+                const editModal = document.getElementById('edit-client-modal');
+                const editModalInstance = new Modal(editModal);
+                editModalInstance.hide();
+
                 getClients();
             } else {
-                toastr.error("Something Went Wrong!");
+                toastr.error("Something went wrong, Try again!");
             }
-        });
+        } catch (error) {
+            toastr.error("An error occurred while updating the client.");
+            console.log(error)
+        }
     }
+
+    $('#updateClientForm').on('submit', updateClient);
 </script>
 @endpush

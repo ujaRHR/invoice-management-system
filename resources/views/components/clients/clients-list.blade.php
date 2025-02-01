@@ -117,7 +117,8 @@
                 const modalId = this.getAttribute('data-modal-target');
                 const modal = document.getElementById(modalId);
                 if (modal) {
-                    modal.classList.toggle('hidden');
+                    const modalInstance = new Modal(modal);
+                    modalInstance.show();
                 }
             });
         });
