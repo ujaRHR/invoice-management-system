@@ -12,7 +12,6 @@ use App\Http\Controllers\FrontendController;
 
 Route::get('/login', [FrontendController::class, 'customerLoginPage']);
 
-
 Route::post('/customer-signup', [CustomerController::class, 'customerSignup']);
 Route::post('/customer-login', [CustomerController::class, 'customerLogin']);
 Route::get('/get-customer', [CustomerController::class, 'getCustomer']);

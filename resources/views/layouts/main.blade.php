@@ -44,7 +44,8 @@
     <script src="{{ asset('js/buttons.js') }}"></script>
     <script src="{{ asset('js/app.bundle.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
-    <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.js') }}"></script>
+
     @stack('other-scripts')
 </body>
 
