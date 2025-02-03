@@ -13,7 +13,7 @@
         <a href="/dashboard" class="flex ml-2 md:mr-24">
           <img src="{{ asset('images/logo.svg') }}" class="w-[180px] mr-3" alt="DySiQ Logo">
         </a>
-        
+
       </div>
       <div class="flex items-center">
         <div class="hidden mr-3 -mb-1 sm:block">
