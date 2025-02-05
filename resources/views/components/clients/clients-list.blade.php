@@ -78,11 +78,7 @@
         let mainTable = $('#dataTables');
         let tableBody = $('#tableBody');
 
-        if ($.fn.DataTable.isDataTable(mainTable)) {
-            mainTable.DataTable().clear().destroy();
-        }
-
-        tableBody.empty();
+        mainTable.DataTable().clear().destroy();
 
         data.forEach(function(item) {
             let newRow = `
@@ -108,21 +104,22 @@
             </td>
         </tr>
         `;
+
             tableBody.append(newRow);
         });
 
         mainTable.DataTable();
-
-        $('#dataTables tbody').off('click').on('click', '.deleteBtn', function() {
-            let clientId = $(this).data('id');
-            $('#clientId').val(clientId);
-        });
-
-        $('#dataTables tbody').on('click', '.editBtn', function() {
-            let clientId = $(this).data('id');
-            $('#updateClientId').val(clientId);
-            clientInfo();
-        });
     }
+
+    $('#dataTables tbody').off('click').on('click', '.deleteBtn', function() {
+        let clientId = $(this).data('id');
+        $('#clientId').val(clientId);
+    });
+
+    $('#dataTables tbody').on('click', '.editBtn', function() {
+        let clientId = $(this).data('id');
+        $('#updateClientId').val(clientId);
+        clientInfo();
+    });
 </script>
 @endpush
