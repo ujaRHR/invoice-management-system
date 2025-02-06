@@ -245,7 +245,6 @@
             }
         } catch (error) {
             toastr.error("An error occurred while updating the client.");
-            console.log(error)
         }
     }
 

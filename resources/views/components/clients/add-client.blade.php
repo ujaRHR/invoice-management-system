@@ -210,7 +210,7 @@
     async function createClient(event) {
         event.preventDefault();
 
-        let formData = {
+        const formData = {
             'fullname': $('#addFullname').val(),
             'email': $('#addEmail').val(),
             'company': $('#addCompany').val(),
@@ -223,9 +223,7 @@
             if (response.status === 200 && response.data.success === true) {
                 toastr.success("Client created successfully!");
 
-                const addModal = document.getElementById('add-client-modal');
-                const addModalInstance = new Modal(addModal);
-                addModalInstance.hide();
+                // $('')
 
                 getClients();
             } else {
