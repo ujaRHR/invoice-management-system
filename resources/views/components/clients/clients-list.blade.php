@@ -39,7 +39,7 @@
     <div class="overflow-x-auto">
         <div class="inline-block min-w-full align-middle">
             <div class="overflow-hidden shadow">
-                <table id="dataTables" class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+                <table id="dataTable" class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                     <thead class="bg-[#f3f3fe] dark:bg-gray-700">
                         <tr>
                             <th scope="col" class="border border-gray-300 w-[20%] p-4 font-medium text-gray-500 dark:text-gray-400">
@@ -75,7 +75,7 @@
         let res = await axios.get('/get-clients');
         let data = res.data.clients;
 
-        let mainTable = $('#dataTables');
+        let mainTable = $('#dataTable');
         let tableBody = $('#tableBody');
 
         mainTable.DataTable().clear().destroy();
@@ -111,15 +111,33 @@
         mainTable.DataTable();
     }
 
-    $('#dataTables tbody').off('click').on('click', '.deleteBtn', function() {
-        let clientId = $(this).data('id');
-        $('#clientId').val(clientId);
+    function initModals() {
+        document.querySelectorAll('[data-modal-toggle]').forEach(button => {
+            button.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal-target');
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.toggle('hidden');
+                }
+            });
+        });
+    }
+
+    $('#dataTable').on('draw.dt', function() {
+        initModals();
+        $(document).off('click').on('click', function() {
+            let clientId = $(this).data('id');
+            $('#clientId').val(clientId);
+        });
     });
 
-    $('#dataTables tbody').on('click', '.editBtn', function() {
-        let clientId = $(this).data('id');
-        $('#updateClientId').val(clientId);
-        clientInfo();
+    $('#dataTable').on('draw.dt', function() {
+        initModals();
+        $('.editBtn').off('click').on('click', function() {
+            let clientId = $(this).data('id');
+            $('#updateClientId').val(clientId);
+            clientInfo();
+        });
     });
 </script>
 @endpush
