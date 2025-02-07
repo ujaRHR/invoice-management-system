@@ -222,9 +222,10 @@
 
             if (response.status === 200 && response.data.success === true) {
                 toastr.success("Client created successfully!");
-
-                // $('')
-
+                $('#addClientBtn').click()
+                const addModal = document.getElementById('add-client-modal');
+                const addModalInstance = new Modal(addModal);
+                addModalInstance.hide();
                 getClients();
             } else {
                 toastr.error("Something went wrong, Try again!");
