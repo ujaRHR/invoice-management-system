@@ -42,6 +42,9 @@
                 <table id="dataTable" class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                     <thead class="bg-[#f3f3fe] dark:bg-gray-700">
                         <tr>
+                            <th scope="col" class="hidden border border-gray-300 w-[20%] p-4 font-medium text-gray-500 dark:text-gray-400">
+                                ID
+                            </th>
                             <th scope="col" class="border border-gray-300 w-[20%] p-4 font-medium text-gray-500 dark:text-gray-400">
                                 Full Name
                             </th>
@@ -83,6 +86,7 @@
         data.forEach(function(item) {
             let newRow = `
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 py-2">
+                    <td class="hidden p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="clientId">${item['id']}</td>
                     <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="clientName">${item['fullname']}</td>
                     <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="clientEmail">${item['email']}</td>
                     <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="clientCompany">${item['company']}</td>
@@ -108,7 +112,11 @@
             tableBody.append(newRow);
         });
 
-        mainTable.DataTable();
+        mainTable.DataTable({
+            "order": [
+                [0, "desc"]
+            ]
+        })
     }
 
     function initModals() {
