@@ -76,7 +76,6 @@
         let tableBody = $('#tableBody');
 
         mainTable.DataTable().clear().destroy();
-        console.log(data)
         data.forEach(function(item) {
             let newRow = `
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 py-2">
