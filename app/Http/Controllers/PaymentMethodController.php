@@ -116,7 +116,7 @@ class PaymentMethodController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no payment methods found',
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([
@@ -142,7 +142,7 @@ class PaymentMethodController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no payment method was found',
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([

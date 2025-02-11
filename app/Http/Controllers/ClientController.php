@@ -145,7 +145,7 @@ class ClientController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no client was found'
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([

@@ -10,12 +10,15 @@ class ServiceController extends Controller
 {
     public function createService(Request $request)
     {
+        $cust_id = $request->header('id');
+
         try {
             $validatedData = $request->validate([
-                'cust_id' => 'required|integer',
                 'service_name' => 'required|string|max:255',
                 'base_price' => 'required|numeric|max:100000',
             ]);
+
+            $validatedData['cust_id'] = $cust_id;
 
             $created = Service::create($validatedData);
 
@@ -28,7 +31,7 @@ class ServiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to create new service',
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([
@@ -97,7 +100,7 @@ class ServiceController extends Controller
 
     public function getServices(Request $request)
     {
-        $cust_id = $request->input('cust_id');
+        $cust_id = $request->header('id');
 
         try {
             $services = Service::where('cust_id', $cust_id)->get();
@@ -111,8 +114,8 @@ class ServiceController extends Controller
             } else {
                 return response()->json([
                     'success' => false,
-                    'message' => 'No services were found',
-                ], 404);
+                    'message' => 'No services were found'
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([
@@ -139,7 +142,7 @@ class ServiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no service was found',
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([

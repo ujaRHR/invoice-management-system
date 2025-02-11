@@ -39,7 +39,7 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to create the invoice',
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([
@@ -67,7 +67,7 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to update the invoice',
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([
@@ -93,7 +93,7 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to delete the invoice',
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([
@@ -120,7 +120,7 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no invoices was found'
-                ], 404);
+                ], 200);
             }
         } catch (Exception $e) {
             return response()->json([

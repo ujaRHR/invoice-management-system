@@ -37,4 +37,17 @@ class DashboardController extends Controller
             return view('pages.clients');
         }
     }
+
+    public function servicePage(Request $request)
+    {
+        $customer_id = $request->header('id');
+
+        try {
+            $customer = Customer::where('id', $customer_id)->first();
+            $services = Service::where('cust_id', $customer_id)->get();
+            return view('pages.services', ['customer' => $customer, 'services' => $services]);
+        } catch (Exception $e) {
+            return view('pages.services');
+        }
+    }
 }
