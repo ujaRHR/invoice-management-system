@@ -45,13 +45,13 @@
                             <th scope="col" class="hidden border border-gray-300 p-4 font-medium text-gray-500 dark:text-gray-400">
                                 ID
                             </th>
-                            <th scope="col" class="border border-gray-300 p-4 font-medium text-gray-500 dark:text-gray-400">
+                            <th scope="col" class="border border-gray-300 w-[40%] p-4 font-medium text-gray-500 dark:text-gray-400">
                                 Service Name
                             </th>
-                            <th scope="col" class="border border-gray-300 p-4 font-medium text-gray-500 dark:text-gray-400">
+                            <th scope="col" class="border border-gray-300 w-[40%] p-4 font-medium text-gray-500 dark:text-gray-400">
                                 Base Price
                             </th>
-                            <th scope="col" class="border border-gray-300 p-4 font-medium text-gray-500 dark:text-gray-400">
+                            <th scope="col" class="border border-gray-300 w-[20%] p-4 font-medium text-gray-500 dark:text-gray-400">
                                 Actions
                             </th>
                         </tr>

@@ -17,11 +17,11 @@
                     <div class="grid grid-cols-6 gap-6 mb-5">
                         <div class="col-span-6 sm:col-span-3">
                             <label for="service-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Name</label>
-                            <input type="text" name="service-name" id="updateServicename" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Wordpress Web Development" required>
+                            <input type="text" name="update-service-name" id="updateServicename" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Wordpress Development" required>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="base-price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Base Price</label>
-                            <input type="number" name="base-price" id=updateBasePrice" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="120.00" required>
+                            <input type="number" name="update-base-price" id="updateBasePrice" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="250" required>
                         </div>
                     </div>
                     <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
@@ -36,12 +36,12 @@
 @push('other-scripts')
 <script>
     async function serviceInfo() {
-        let serviceId = $('#updateServiceId').val()
+        let serviceId = parseInt($('#updateServiceId').val());
 
         axios.post('/service-info', {
             id: serviceId
         }).then(function(response) {
-            $('#updateServiceName').val(response.data.service.service_name)
+            $('#updateServicename').val(response.data.service.service_name)
             $('#updateBasePrice').val(response.data.service.base_price)
         })
     }
@@ -50,7 +50,7 @@
         event.preventDefault();
 
         let serviceId = parseInt($('#updateServiceId').val());
-        let serviceName = $('#updateServiceName').val();
+        let serviceName = $('#updateServicename').val();
         let basePrice = $('#updateBasePrice').val();
 
         const formData = {
