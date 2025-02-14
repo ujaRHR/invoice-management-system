@@ -226,6 +226,7 @@
                 const addModal = document.getElementById('add-client-modal');
                 const addModalInstance = new Modal(addModal);
                 addModalInstance.hide();
+                $('[modal-backdrop]').remove();
                 getClients();
             } else {
                 toastr.error("Something went wrong, Try again!");

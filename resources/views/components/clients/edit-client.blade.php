@@ -238,7 +238,7 @@
                 const editModal = document.getElementById('edit-client-modal');
                 const editModalInstance = new Modal(editModal);
                 editModalInstance.hide();
-
+                $('[modal-backdrop]').remove();
                 getClients();
             } else {
                 toastr.error("Something went wrong, Try again!");

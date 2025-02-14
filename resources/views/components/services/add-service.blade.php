@@ -58,6 +58,7 @@
                 const addModal = document.getElementById('add-service-modal');
                 const addModalInstance = new Modal(addModal);
                 addModalInstance.hide();
+                $('[modal-backdrop]').remove();
                 getServices();
             } else {
                 toastr.error("Something went wrong, Try again!");

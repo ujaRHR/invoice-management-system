@@ -45,7 +45,7 @@
                 const deleteModal = document.getElementById('delete-client-modal');
                 const deleteModalInstance = new Modal(deleteModal);
                 deleteModalInstance.hide();
-
+                $('[modal-backdrop]').remove();
                 getClients();
             } else {
                 toastr.error("Something went wrong, Try again!");

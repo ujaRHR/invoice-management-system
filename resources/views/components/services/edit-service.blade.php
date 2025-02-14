@@ -68,6 +68,7 @@
                 const editModal = document.getElementById('edit-service-modal');
                 const editModalInstance = new Modal(editModal);
                 editModalInstance.hide();
+                $('[modal-backdrop]').remove();
 
                 getServices();
             } else {
