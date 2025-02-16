@@ -10,14 +10,17 @@ class PaymentMethodController extends Controller
 {
     public function createMethod(Request $request)
     {
+        $cust_id = $request->header('id');
+
         try {
             $validatedData = $request->validate([
-                'cust_id' => 'required|integer',
                 'method_type' => 'required|string|max:55',
                 'provider' => 'required|string|max:100',
                 'account_details' => 'required|string|max:255',
                 'is_default' => 'required|string'
             ]);
+
+            $validatedData['cust_id'] = $cust_id;
 
             $created = PaymentMethod::create($validatedData);
 
