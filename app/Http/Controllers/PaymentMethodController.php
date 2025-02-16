@@ -101,7 +101,7 @@ class PaymentMethodController extends Controller
 
     public function getMethods(Request $request)
     {
-        $cust_id = $request->input('cust_id');
+        $cust_id = $request->header('id');
 
         try {
             $methods = PaymentMethod::where('cust_id', $cust_id)->get();
@@ -110,7 +110,7 @@ class PaymentMethodController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'payment methods fetched successfully',
-                    'services' => $methods,
+                    'methods' => $methods,
                 ], 200);
             } else {
                 return response()->json([
