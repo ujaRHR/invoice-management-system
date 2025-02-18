@@ -139,7 +139,7 @@ class PaymentMethodController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'payment methods fetched successfully',
-                    'services' => $method,
+                    'method' => $method,
                 ], 200);
             } else {
                 return response()->json([
