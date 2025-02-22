@@ -44,3 +44,4 @@ Route::get('/dashboard', [DashboardController::class, 'dashboardPage'])->middlew
 Route::get('/clients', [DashboardController::class, 'clientPage'])->middleware('verify');
 Route::get('/services', [DashboardController::class, 'servicePage'])->middleware('verify');
 Route::get('/payment-methods', [DashboardController::class, 'paymentMethodsPage'])->middleware('verify');
+Route::get('/invoices', [DashboardController::class, 'invoicePage'])->middleware('verify');

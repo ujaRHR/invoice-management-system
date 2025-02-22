@@ -61,4 +61,16 @@ class DashboardController extends Controller
             return view('pages.payment-methods');
         }
     }
+
+    public function invoicePage(Request $request)
+    {
+        $customer_id = $request->header('id');
+        try {
+            $customer = Customer::where('id', $customer_id)->first();
+            $invoices = Invoice::where('cust_id', $customer_id)->get();
+            return view('pages.invoices', ['customer' => $customer, 'invoices' => $invoices]);
+        } catch (Exception $e) {
+            return view('pages.invoices');
+        }
+    }
 }
