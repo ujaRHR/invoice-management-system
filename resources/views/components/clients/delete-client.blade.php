@@ -39,8 +39,8 @@
         }).then(function(response) {
             if (response.status == 200 && response.data.success == true) {
                 toastr.success("Client deleted successfully!");
+                getClients();
                 $('#modalCloseBtn').click();
-                getClients()
             } else {
                 toastr.error("Something went wrong, Try again!");
             }

@@ -3,7 +3,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
             <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
                 <h3 class="text-xl font-semibold dark:text-white">
-                    Edit client
+                    Edit Client
                 </h3>
                 <button type="button" id="editBtnClose" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-toggle="edit-client-modal">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -12,7 +12,7 @@
                 </button>
             </div>
             <div class="p-6 space-y-6">
-                <form id="updateClientForm">
+                <form id="updateClientForm" onsubmit="updateClient(event)">
                     <input type="hidden" id="updateClientId" value="">
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
@@ -275,11 +275,11 @@
                             </select>
                         </div>
                     </div>
+                    <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
+                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Update</button>
+                    </div>
+                </form>
             </div>
-            <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Save all</button>
-            </div>
-            </form>
         </div>
     </div>
 </div>
@@ -318,15 +318,13 @@
 
         axios.post('/update-client', formData).then(function(response) {
             if (response.status == 200 && response.data.success == true) {
-                toastr.success("Client updated successfully")
+                toastr.success("Client updated successfully");
                 $('#editBtnClose').click();
                 getClients();
             } else {
-                toast.error("Something Went Wrong!")
+                toastr.error("Something Went Wrong!");
             }
         });
     }
-
-    $('#updateClientForm').on('submit', updateClient);
 </script>
 @endpush
