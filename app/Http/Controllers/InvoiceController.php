@@ -108,7 +108,17 @@ class InvoiceController extends Controller
         $cust_id = $request->input('cust_id');
 
         try {
-            $invoices = Invoice::where('cust_id', $cust_id)->get();
+            $invoices = Invoice::where('cust_id', $cust_id)->with([
+                'client' => function ($query) {
+                    $query->select('id', 'fullname');
+                },
+                'service' => function ($query) {
+                    $query->select('id', 'service_name');
+                },
+                'paymentMethod' => function ($query) {
+                    $query->select('id', 'method_type');
+                }
+            ])->get();
 
             if ($invoices) {
                 return response()->json([
