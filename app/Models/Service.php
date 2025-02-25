@@ -10,4 +10,9 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = ['cust_id', 'service_name', 'base_price'];
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'service_id');
+    }
 }
