@@ -105,7 +105,7 @@ class InvoiceController extends Controller
 
     public function getInvoices(Request $request)
     {
-        $cust_id = $request->input('cust_id');
+        $cust_id = $request->header('id');
 
         try {
             $invoices = Invoice::where('cust_id', $cust_id)->with([
