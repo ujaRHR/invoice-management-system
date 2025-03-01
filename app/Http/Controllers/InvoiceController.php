@@ -116,7 +116,7 @@ class InvoiceController extends Controller
                     $query->select('id', 'service_name');
                 },
                 'paymentMethod' => function ($query) {
-                    $query->select('id', 'method_type');
+                    $query->select('id', 'method_type', 'provider', 'account_details');
                 }
             ])->get();
 
