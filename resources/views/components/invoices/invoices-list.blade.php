@@ -41,35 +41,32 @@
             <div class="overflow-hidden shadow">
                 <table id="dataTable" class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                     <thead class="bg-[#f3f3fe] dark:bg-gray-700">
-                        <tr>
-                            <th scope="col" class="hidden border border-gray-300 p-4 font-medium text-gray-500 dark:text-gray-400">
+                        <tr class="text-left">
+                            <th scope="col" class="hidden border border-gray-300 p-4 font-medium text-gray-500">
                                 ID
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[15%] p-4 font-medium text-gray-500 dark:text-gray-400">
-                                Client
+                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
+                                Invoice No.
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500 dark:text-gray-400">
-                                Invoice
+                            <th scope="col" class="border border-gray-300 w-[15%] p-4 font-medium text-gray-500">
+                                Client Name
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[25%] p-4 font-medium text-gray-500 dark:text-gray-400">
+                            <th scope="col" class="border border-gray-300 w-[25%] p-4 font-medium text-gray-500">
                                 Service
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[7%] p-4 font-medium text-gray-500 dark:text-gray-400">
-                                Qty.
+                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
+                                Amount
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[13%] p-4 font-medium text-gray-500 dark:text-gray-400">
+                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
+                                Method
+                            </th>
+                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
                                 Due Date
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500 dark:text-gray-400">
-                                Unit Price
-                            </th>
-                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500 dark:text-gray-400">
-                                Total
-                            </th>
-                            <th scope="col" class="border border-gray-300 w-[7%] p-4 font-medium text-gray-500 dark:text-gray-400">
+                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
                                 Status
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[8%] p-4 font-medium text-gray-500 dark:text-gray-400">
+                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
                                 Action
                             </th>
                         </tr>
@@ -95,27 +92,44 @@
 
         mainTable.DataTable().clear().destroy();
 
+        const statusClasses = {
+            cancelled: 'bg-red-200 text-red-800',
+            paid: 'bg-green-200 text-green-800',
+            pending: 'bg-orange-200 text-orange-800',
+        };
+        
+        const status = {
+            cancelled: 'CANCELLED',
+            paid: 'COMPLETED',
+            pending: 'PENDING',
+        };
+
         data.forEach(function(item) {
             let newRow = `
-                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 py-2">
-                    <td class="hidden p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="invoiceId">${item['id']}</td>
-                    <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="invoiceType">${item['invoice_type'].replace(/\b\w/g, char => char.toUpperCase())}</td>
-                    <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="invoiceProvider">${item['provider']}</td>
-                    <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="invoiceDetails">${item['account_details']}</td>
-                    <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="invoiceDefault">${item['is_default']}</td>
+                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 py-2 text-left">
+                    <td class="hidden" id="invoiceId">${item['id']}</td>
+                    <td class="p-4 font-mono font-normal text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="invoiceNo">#${item['invoice_number']}</td>
+                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="clientName">${item['client']['fullname'].replace(/\b\w/g, char => char.toUpperCase())}</td>
+                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="serviceName">${item['service']['service_name']}</td>
+                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="totalAmount">$${item['total_amount']}</td>
+                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="paymentMethod">${item['payment_method']['method_type'].replace(/\b\w/g, char => char.toUpperCase())}</td>
+                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="dueDate">${item['due_date'].split(" ")[0]}</td>
+                    <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="status">
+                        <label class="text-xs font-bold mr-2 px-2.5 py-0.5 rounded-md ${statusClasses[item['status']]}">${status[item['status']]}
+                        </label>
+                    </td>
+                    
                     <td class="p-4 space-x-2 whitespace-nowrap border border-gray-300">
                         <button type="button" data-modal-target="edit-invoice-modal" data-id="${item['id']}" data-modal-toggle="edit-invoice-modal" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
                                 <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
                             </svg>
-                            Edit
                         </button>
                         <button type="button" data-modal-target="delete-invoice-modal" data-id="${item['id']}" data-modal-toggle="delete-invoice-modal" class="deleteBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                             </svg>
-                            Delete
                         </button>
                     </td>
                 </tr>
