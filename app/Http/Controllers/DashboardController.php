@@ -68,9 +68,20 @@ class DashboardController extends Controller
         try {
             $customer = Customer::where('id', $customer_id)->first();
             $invoices = Invoice::where('cust_id', $customer_id)->get();
-            return view('pages.invoices', ['customer' => $customer, 'invoices' => $invoices]);
+            return view('pages.invoices.invoices', ['customer' => $customer, 'invoices' => $invoices]);
         } catch (Exception $e) {
-            return view('pages.invoices');
+            return view('pages.invoices.invoices');
+        }
+    }
+
+    public function createInvoicePage(Request $request)
+    {
+        $customer_id = $request->header('id');
+        try {
+            $customer = Customer::where('id', $customer_id)->first();
+            return view('pages.invoices.create-invoice', ['customer' => $customer]);
+        } catch (Exception $e) {
+            return view('pages.invoices.create-invoice');
         }
     }
 }
