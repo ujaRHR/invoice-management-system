@@ -35,139 +35,97 @@
 
 
 <!-- Invoice Form -->
-<div class="p-6 space-y-8">
-    <!-- Header -->
-    <header class="text-center">
-        <h1 class="text-3xl font-bold text-gray-800">Create Invoice</h1>
-        <p class="text-sm text-gray-500">Fill in the details below to generate your invoice.</p>
-    </header>
+<div class="p-8 bg-gray-100 min-h-screen flex justify-center items-center">
+    <div class="bg-white shadow-2xl rounded-lg p-8 max-w-3xl w-full">
+        <h2 class="text-3xl font-bold mb-6 text-gray-700 text-center flex items-center justify-center gap-2">
+            <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h11M9 21V3m0 18H5m4 0h4m4 0V3m0 18h4m-4 0h4"></path>
+            </svg>
+            Invoice Creation
+        </h2>
 
-    <!-- Client Information -->
-    <section class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Client Information</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label for="clientName" class="block text-sm font-medium text-gray-600">Client Name</label>
-                <input type="text" id="clientName" placeholder="Enter client name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-            <div>
-                <label for="clientEmail" class="block text-sm font-medium text-gray-600">Client Email</label>
-                <input type="email" id="clientEmail" placeholder="Enter client email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
+        <!-- Client Information -->
+        <div class="mb-6">
+            <label class="block text-gray-600 mb-2 font-semibold flex items-center gap-2">
+                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c1.656 0 3-1.344 3-3s-1.344-3-3-3-3 1.344-3 3 1.344 3 3 3zM21 20v-1c0-2-4-3-9-3s-9 1-9 3v1"></path>
+                </svg>
+                Select Client
+            </label>
+            <select class="w-full p-3 border rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-green-500">
+                <option>John Doe</option>
+                <option>Jane Smith</option>
+                <option>Michael Johnson</option>
+            </select>
         </div>
-    </section>
 
-    <!-- Service Details -->
-    <section class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Service Details</h2>
-        <div id="serviceRows" class="space-y-4">
-            <div class="flex items-center justify-between">
-                <div class="flex-grow mr-4">
-                    <label class="block text-sm font-medium text-gray-600">Service Name</label>
-                    <input type="text" placeholder="Enter service name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="w-24">
-                    <label class="block text-sm font-medium text-gray-600">Quantity</label>
-                    <input type="number" placeholder="Qty" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <div class="w-32">
-                    <label class="block text-sm font-medium text-gray-600">Rate ($)</label>
-                    <input type="number" placeholder="Rate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                </div>
-                <button class="ml-4 mt-6 text-red-500 hover:text-red-700 focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.618L9.894 2.553A1 1 0 009 2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <button id="addServiceRow" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Add Service
-        </button>
-    </section>
-
-    <!-- Tax and Total -->
-    <section class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Tax and Total</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Dates -->
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
             <div>
-                <label for="taxRate" class="block text-sm font-medium text-gray-600">Tax Rate (%)</label>
-                <input type="number" id="taxRate" placeholder="Enter tax rate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label class="block text-gray-600 mb-2 font-semibold">Invoice Date</label>
+                <input type="date" class="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
             </div>
             <div>
-                <label for="totalAmount" class="block text-sm font-medium text-gray-600">Total Amount ($)</label>
-                <input type="text" id="totalAmount" readonly placeholder="Calculated total" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-500 sm:text-sm">
+                <label class="block text-gray-600 mb-2 font-semibold">Due Date</label>
+                <input type="date" class="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500">
             </div>
         </div>
-    </section>
 
-    <!-- Payment Method -->
-    <section class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Payment Method</h2>
-        <div class="space-y-4">
-            <div class="flex items-center">
-                <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                <label for="creditCard" class="ml-3 block text-sm font-medium text-gray-700">Credit Card</label>
-            </div>
-            <div class="flex items-center">
-                <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                <label for="bankTransfer" class="ml-3 block text-sm font-medium text-gray-700">Bank Transfer</label>
-            </div>
+        <!-- Service Details -->
+        <div class="mb-6">
+            <label class="block text-gray-600 mb-2 font-semibold flex items-center gap-2">
+                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-3 3V9m-7 12h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                Select Service
+            </label>
+            <select class="w-full p-3 border rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-green-500" onchange="calculateTotal()">
+                <option value="100">Web Development - $100</option>
+                <option value="200">Graphic Design - $200</option>
+                <option value="300">SEO Optimization - $300</option>
+            </select>
         </div>
-    </section>
 
-    <!-- Additional Notes -->
-    <section class="bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Additional Notes</h2>
-        <textarea rows="4" placeholder="Enter any additional notes..." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-    </section>
+        <!-- Tax & Total -->
+        <div class="mb-6">
+            <label class="block text-gray-600 mb-2 font-semibold">Tax (%)</label>
+            <input type="number" id="tax" class="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500" value="0" oninput="calculateTotal()">
+        </div>
+        <div class="text-2xl font-bold text-gray-700 bg-green-100 p-4 rounded-lg flex justify-between">
+            <span>Total:</span>
+            <span id="grand-total">$0.00</span>
+        </div>
 
-    <!-- Submit Button -->
-    <footer class="text-center">
-        <button class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <!-- Payment Method -->
+        <div class="mt-6">
+            <label class="block text-gray-600 mb-2 font-semibold">Payment Method</label>
+            <select class="w-full p-3 border rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-green-500">
+                <option>Bank Transfer</option>
+                <option>Credit Card</option>
+                <option>PayPal</option>
+            </select>
+        </div>
+
+        <!-- Additional Notes -->
+        <div class="mt-6">
+            <label class="block text-gray-600 mb-2 font-semibold">Additional Notes</label>
+            <textarea class="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500" rows="4"></textarea>
+        </div>
+
+        <button class="mt-6 w-full px-6 py-3 bg-green-500 text-white text-lg font-semibold rounded-lg hover:bg-green-600 transition duration-300 flex items-center justify-center gap-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 0v4m0-4h4m-4 0H8m8-6H8a4 4 0 00-4 4v8a4 4 0 004 4h8a4 4 0 004-4v-8a4 4 0 00-4-4z"></path>
+            </svg>
             Generate Invoice
         </button>
-    </footer>
+    </div>
 </div>
 
 <script>
-    // JavaScript for dynamic calculations
-    document.getElementById('addServiceRow').addEventListener('click', function() {
-        const serviceRows = document.getElementById('serviceRows');
-        const newRow = `
-        <div class="flex items-center justify-between">
-          <div class="flex-grow mr-4">
-            <label class="block text-sm font-medium text-gray-600">Service Name</label>
-            <input type="text" placeholder="Enter service name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          </div>
-          <div class="w-24">
-            <label class="block text-sm font-medium text-gray-600">Quantity</label>
-            <input type="number" placeholder="Qty" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          </div>
-          <div class="w-32">
-            <label class="block text-sm font-medium text-gray-600">Rate ($)</label>
-            <input type="number" placeholder="Rate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-          </div>
-          <button class="ml-4 mt-6 text-red-500 hover:text-red-700 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.618L9.894 2.553A1 1 0 009 2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-            </svg>
-          </button>
-        </div>
-      `;
-        serviceRows.insertAdjacentHTML('beforeend', newRow);
-    });
-
-    // Calculate total amount dynamically
-    document.addEventListener('input', function() {
-        let total = 0;
-        document.querySelectorAll('#serviceRows .flex').forEach(row => {
-            const quantity = parseFloat(row.querySelector('.w-24 input').value) || 0;
-            const rate = parseFloat(row.querySelector('.w-32 input').value) || 0;
-            total += quantity * rate;
-        });
-        const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-        const totalWithTax = total + (total * (taxRate / 100));
-        document.getElementById('totalAmount').value = totalWithTax.toFixed(2);
-    });
+    function calculateTotal() {
+        let servicePrice = document.querySelector('select').value;
+        let tax = document.getElementById('tax').value;
+        let grandTotal = parseFloat(servicePrice) + (parseFloat(servicePrice) * tax / 100);
+        document.getElementById('grand-total').innerText = `$${grandTotal.toFixed(2)}`;
+    }
 </script>
