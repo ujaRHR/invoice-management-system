@@ -27,7 +27,7 @@
                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input id="datepicker-autohide" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="dd-mm-yyyy" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date">
+                    <input id="issueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="dd-mm-yyyy" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date">
                 </div>
                 <div class="relative max-w-sm">
                     <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Due Date</label>
@@ -36,7 +36,7 @@
                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input id="datepicker-autohide" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="dd-mm-yyyy" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date">
+                    <input id="dueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="dd-mm-yyyy" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date">
                 </div>
             </div>
         </section>
@@ -51,25 +51,23 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Select Client</label>
-                    <select class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="updateClientInfo()">
-                        <option value="1">John Doe</option>
-                        <option value="2">Jane Smith</option>
-                        <option value="3">Michael Johnson</option>
+                    <select id="clientsList" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="getClientInfo()">
+                        <option value="">Select Client</option>
                     </select>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Business Name</label>
-                    <input type="text" id="business-name" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
+                    <input type="text" id="clientBusinessName" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Email</label>
-                    <input type="email" id="client-email" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
+                    <input type="email" id="clientEmail" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Country</label>
-                    <input type="text" id="client-country" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
+                    <input type="text" id="clientCountry" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
                 </div>
             </div>
         </section>
@@ -84,15 +82,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Select Service</label>
-                    <select class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="updateServicePrice()">
-                        <option value="100">Web Development - $100</option>
-                        <option value="200">Graphic Design - $200</option>
-                        <option value="300">SEO Optimization - $300</option>
+                    <select id="servicesList" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="getServiceInfo()">
+                        <option value="">Select Service</option>
                     </select>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Unit Price</label>
-                    <input type="text" id="unit-price" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
+                    <input type="text" id="unitPrice" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -107,7 +103,7 @@
             </div>
             <div class="text-xl font-bold text-gray-700 dark:text-gray-300 bg-green-100 dark:bg-green-900 p-4 rounded-lg flex justify-between">
                 <span>Total:</span>
-                <span id="grand-total">$0.00</span>
+                <span id="grandTotal">$0.00</span>
             </div>
         </section>
         <!-- Payment and Notes Section -->
@@ -155,29 +151,75 @@
 </div>
 
 
+@push('other-scripts')
 <script>
-    function updateClientInfo() {
-        const clients = {
-            1: {
-                businessName: "Doe Enterprises",
-                email: "john.doe@example.com",
-                country: "USA"
-            },
-            2: {
-                businessName: "Smith Co.",
-                email: "jane.smith@example.com",
-                country: "Canada"
-            },
-            3: {
-                businessName: "Johnson Ltd.",
-                email: "michael.johnson@example.com",
-                country: "UK"
-            }
-        };
-        const selectedClientId = document.querySelector('select').value;
-        const client = clients[selectedClientId];
-        document.getElementById('business-name').value = client.businessName;
-        document.getElementById('client-email').value = client.email;
-        document.getElementById('client-country').value = client.country;
+    getClients()
+    getServices()
+
+    async function getClients() {
+        try {
+            let res = await axios.get('/get-clients');
+            let data = res.data.clients;
+
+            let clientsList = $('#clientsList');
+
+            data.forEach(function(item) {
+                let newOption = `<option data-id="${item['id']}" value="${item['fullname']}">${item['fullname']}</option>`;
+                clientsList.append(newOption);
+            });
+        } catch (error) {
+            console.error("Error fetching client info:", error);
+        }
+    }
+
+    async function getServices() {
+        try {
+            let res = await axios.get('/get-services');
+            let data = res.data.services;
+
+            let servicesList = $('#servicesList');
+
+            data.forEach(function(item) {
+                let newOption = `<option data-id="${item['id']}" value="${item['service_name']}">${item['service_name']}</option>`;
+                servicesList.append(newOption);
+            });
+        } catch (error) {
+            console.error("Error fetching service info:", error);
+        }
+    }
+
+    async function getClientInfo() {
+        let clientId = $('#clientsList').find(':selected').data('id');
+
+        axios.post('/client-info', {
+            id: clientId
+        }).then(function(response) {
+            $('#clientBusinessName').val(response.data.client.company)
+            $('#clientEmail').val(response.data.client.email)
+            $('#clientCountry').val(response.data.client.country)
+        })
+    }
+
+    async function getServiceInfo() {
+        let serviceId = $('#servicesList').find(':selected').data('id');
+
+        axios.post('/service-info', {
+            id: serviceId
+        }).then(function(response) {
+            $('#unitPrice').val(response.data.service.base_price)
+        })
+    }
+
+    async function calculateTotal() {
+        let unitPrice = parseFloat(document.getElementById('unitPrice').value) || 0;
+        let quantity = parseInt(document.getElementById('quantity').value) || 1;
+        let taxPercent = parseFloat(document.getElementById('tax').value) || 0;
+
+        let subtotal = unitPrice * quantity;
+        let taxAmount = (subtotal * taxPercent) / 100;
+        let total = subtotal + taxAmount;
+
+        document.getElementById('grandTotal').innerText = `$${total.toFixed(2)}`;
     }
 </script>
+@endpush
