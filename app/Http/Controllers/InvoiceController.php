@@ -37,7 +37,7 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'invoice created successfully',
-                ], 201);
+                ], 200);
             } else {
                 return response()->json([
                     'success' => false,
@@ -167,6 +167,30 @@ class InvoiceController extends Controller
                 'success' => false,
                 'message' => 'something went wrong!'
             ]);
+        }
+    }
+
+    public function shareInvoice($invoice_number)
+    {
+        try {
+            $invoice = Invoice::where('invoice_number', $invoice_number)->with([
+                'customer' => function ($query) {
+                    $query->select('id', 'fullname');
+                },
+                'client' => function ($query) {
+                    $query->select('id', 'fullname', 'email', 'company', 'country');
+                },
+                'service' => function ($query) {
+                    $query->select('id', 'service_name');
+                },
+                'paymentMethod' => function ($query) {
+                    $query->select('id', 'method_type', 'provider', 'account_details');
+                }
+            ])->first();
+
+            return view('pages.invoices.share-invoice', ['invoice' => $invoice]);
+        } catch (Exception $e) {
+            return response()->json(['invoice_number' => $invoice_number]);
         }
     }
 }

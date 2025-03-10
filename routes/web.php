@@ -39,6 +39,7 @@ Route::post('/update-invoice', [InvoiceController::class, 'updateInvoice'])->mid
 Route::post('/delete-invoice', [InvoiceController::class, 'deleteInvoice'])->middleware('verify');
 Route::get('/get-invoices', [InvoiceController::class, 'getInvoices'])->middleware('verify');
 Route::post('/invoice-info', [InvoiceController::class, 'invoiceInfo'])->middleware('verify');
+Route::get('/invoice/{number}', [InvoiceController::class, 'shareInvoice']);
 
 Route::get('/dashboard', [DashboardController::class, 'dashboardPage'])->middleware('verify');
 Route::get('/clients', [DashboardController::class, 'clientPage'])->middleware('verify');

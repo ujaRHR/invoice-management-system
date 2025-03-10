@@ -38,7 +38,7 @@
                                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
                         </div>
-                        <input id="dueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date" required onchange="validateDates()">
+                        <input id="dueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date" required>
                     </div>
                 </div>
             </section>
@@ -291,11 +291,9 @@
 
             if (response.status === 200 && response.data.success === true) {
                 toastr.success("Invoice created successfully!");
-                // const addModal = document.getElementById('add-service-modal');
-                // const addModalInstance = new Modal(addModal);
-                // addModalInstance.hide();
-                // $('[modal-backdrop]').remove();
-                window.location.replace('/invoices')
+                setTimeout(() => {
+                    window.location.href = '/invoices';
+                }, 1000);
             } else {
                 toastr.error("Something went wrong, Try again!");
             }
