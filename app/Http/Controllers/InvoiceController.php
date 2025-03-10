@@ -10,23 +10,26 @@ class InvoiceController extends Controller
 {
     public function createInvoice(Request $request)
     {
+        $cust_id = $request->header('id');
+
         try {
             $validatedData = $request->validate([
-                'cust_id' => 'required|integer',
                 'client_id' => 'required|integer',
                 'invoice_number' => 'required|integer',
                 'service_id' => 'required|integer',
-                'quantity' => 'required|integer',
-                'unit_price' => 'required|numeric',
-                'issue_date' => 'required|string:max:255',
-                'due_date' => 'required|string|max:255',
-                'amount' => 'required|numeric',
-                'tax' => 'required|numeric',
-                'total_amount' => 'required|numeric',
-                'status' => 'required|string',
+                'quantity' => 'required|integer|min:1',
+                'unit_price' => 'required|numeric|min:0',
+                'issue_date' => 'required|date|before_or_equal:due_date',
+                'due_date' => 'required|date|after_or_equal:issue_date',
+                'amount' => 'required|numeric|min:0',
+                'tax' => 'required|numeric|min:0',
+                'total_amount' => 'required|numeric|min:0',
+                'status' => 'string|max:255',
                 'payment_method' => 'required|integer',
                 'notes' => 'nullable|string|max:255'
             ]);
+
+            $validatedData['cust_id'] = $cust_id;
 
             $created = Invoice::create($validatedData);
 

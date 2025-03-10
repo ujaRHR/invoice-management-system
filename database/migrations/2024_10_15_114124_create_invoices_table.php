@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('service_id');
             $table->bigInteger('quantity');
             $table->decimal('unit_price', 10, 2);
-            $table->dateTime('issue_date');
-            $table->dateTime('due_date');
+            $table->date('issue_date');
+            $table->date('due_date');
             $table->decimal('amount', 10, 2);
             $table->decimal('tax', 10, 2);
             $table->decimal('total_amount', 10, 2);

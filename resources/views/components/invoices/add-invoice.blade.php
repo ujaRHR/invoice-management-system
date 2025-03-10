@@ -29,7 +29,7 @@
                                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
                         </div>
-                        <input id="issueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="dd-mm-yyyy" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date" required>
+                        <input id="issueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date" required>
                     </div>
                     <div class="relative max-w-sm">
                         <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Due Date</label>
@@ -38,7 +38,7 @@
                                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                             </svg>
                         </div>
-                        <input id="dueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="dd-mm-yyyy" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date" required onchange="validateDates()">
+                        <input id="dueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date" required onchange="validateDates()">
                     </div>
                 </div>
             </section>
@@ -100,7 +100,7 @@
                     </div>
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Tax (%)</label>
-                        <input type="number" id="tax" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="0" min="0" oninput="calculateTotal()" required>
+                        <input type="number" id="tax" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="0" min="0" max="100" step="0.01" oninput="calculateTotal()" required>
                     </div>
                 </div>
                 <div class="text-xl font-bold text-gray-700 dark:text-gray-300 bg-green-100 dark:bg-green-900 p-4 rounded-lg flex justify-between">
@@ -134,13 +134,13 @@
                     </div>
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Additional Notes</label>
-                        <textarea class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" rows="3">We appreciate your prompt payment. If you have any questions regarding this invoice, please feel free to reach out to me...</textarea>
+                        <textarea id="additionalNotes" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" rows="3">We appreciate your prompt payment. If you have any questions regarding this invoice, please feel free to reach out to me...</textarea>
                     </div>
                 </div>
             </section>
 
             <div class="flex justify-end">
-                <button class="px-6 py-3 bg-green-500 dark:bg-green-700 text-white text-lg font-semibold rounded-lg hover:bg-green-600 dark:hover:bg-green-800 transition duration-300 flex items-center gap-2" aria-label="Generate Invoice" onsubmit="createService()">
+                <button class="px-6 py-3 bg-green-500 dark:bg-green-700 text-white text-lg font-semibold rounded-lg hover:bg-green-600 dark:hover:bg-green-800 transition duration-300 flex items-center gap-2" aria-label="Generate Invoice">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="#ffffff" d="m23.5 17l-5 5l-3.5-3.5l1.5-1.5l2 2l3.5-3.5zM6 2c-1.11 0-2 .89-2 2v16c0 1.11.89 2 2 2h7.81c-.53-.91-.81-1.95-.81-3c0-3.31 2.69-6 6-6c.34 0 .67.03 1 .08V8l-6-6m-1 1.5L18.5 9H13Z" />
                     </svg>
@@ -263,30 +263,47 @@
     async function createInvoice() {
         event.preventDefault();
 
+        let unitPrice = parseFloat($('#unitPrice').val());
+        let quantity = parseInt($('#quantity').val());
+        let taxPercent = parseFloat($('#tax').val());
+
+        let subtotal = unitPrice * quantity;
+        let taxAmount = (subtotal * taxPercent) / 100;
+        let total = subtotal + taxAmount;
+
         const formData = {
             'client_id': $('#clientsList').find(':selected').data('id'),
-            'invoice_number': $('#invoiceNo').val(),
+            'invoice_number': parseInt($('#invoiceNo').val()),
             'service_id': $('#servicesList').find(':selected').data('id'),
-            'quantity': $('#quantity').val(),
+            'quantity': quantity,
+            'unit_price': unitPrice,
+            'issue_date': $('#issueDate').val(),
+            'due_date': $('#dueDate').val(),
+            'amount': subtotal,
+            'tax': taxPercent,
+            'total_amount': total,
+            'payment_method': $('#methodsList').find(':selected').data('id'),
+            'notes': $('#additionalNotes').val()
         };
 
         try {
-            const response = await axios.post('/create-service', formData);
+            const response = await axios.post('/create-invoice', formData);
 
             if (response.status === 200 && response.data.success === true) {
-                toastr.success("Service created successfully!");
-                $('#addServiceBtn').click()
-                const addModal = document.getElementById('add-service-modal');
-                const addModalInstance = new Modal(addModal);
-                addModalInstance.hide();
-                $('[modal-backdrop]').remove();
-                getServices();
+                toastr.success("Invoice created successfully!");
+                // const addModal = document.getElementById('add-service-modal');
+                // const addModalInstance = new Modal(addModal);
+                // addModalInstance.hide();
+                // $('[modal-backdrop]').remove();
+                window.location.replace('/invoices')
             } else {
                 toastr.error("Something went wrong, Try again!");
             }
         } catch (error) {
-            toastr.error("An error occurred while creating the service.");
+            toastr.error("An error occurred while generating the invoice.");
         }
     }
+
+    $('#invoiceForm').on('submit', createInvoice);
 </script>
 @endpush
