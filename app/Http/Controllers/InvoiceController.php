@@ -109,17 +109,26 @@ class InvoiceController extends Controller
         $invoice_number = $request->input('invoice_number');
         $status = $request->input('status');
 
-        if ($status === 'paid') {
-            return response()->json([
-                'success' => false,
-                'message' => "status can't be updated",
-            ], 400);
-        }
-
         try {
-            $updated = Invoice::where('cust_id', $cust_id)
+            $invoice = Invoice::where('cust_id', $cust_id)
                 ->where('invoice_number', $invoice_number)
-                ->update(['status' => $status]);
+                ->first();
+
+            if (!$invoice) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'invoice not found',
+                ], 404);
+            }
+
+            if ($invoice->status === 'paid') {
+                return response()->json([
+                    'success' => false,
+                    'message' => "status can't be updated as it's already paid",
+                ], 400);
+            }
+
+            $updated = $invoice->update(['status' => $status]);
 
             if ($updated) {
                 return response()->json([
@@ -130,7 +139,7 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to update the status',
-                ], 404);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
