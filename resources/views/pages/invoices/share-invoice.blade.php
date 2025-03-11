@@ -26,11 +26,11 @@
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Issue Date:</p>
-                    <p class="text-base font-medium text-gray-800 dark:text-gray-200">2023-10-01</p>
+                    <p class="text-base font-medium text-gray-800 dark:text-gray-200">{{ explode(' ', $invoice->issue_date)[0] }}</p>
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Due Date:</p>
-                    <p class="text-base font-medium text-gray-800 dark:text-gray-200">2023-10-15</p>
+                    <p class="text-base font-medium text-gray-800 dark:text-gray-200">{{ explode(' ', $invoice->due_date)[0] }}</p>
                 </div>
             </div>
         </section>

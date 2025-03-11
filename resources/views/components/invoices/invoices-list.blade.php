@@ -31,23 +31,23 @@
             <div class="overflow-hidden shadow">
                 <table id="dataTable" class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                     <thead class="bg-[#f3f3fe] dark:bg-gray-700">
-                        <tr class="text-left">
+                        <tr class="text-gray-700">
                             <th scope="col" class="hidden border border-gray-300 p-4 font-medium text-gray-500">
                                 ID
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
-                                Invoice No.
+                            <th scope="col" class="border border-gray-300 w-[9%] p-4 font-medium text-gray-500">
+                                Invoice
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[15%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[18%] p-4 font-medium text-gray-500">
                                 Client Name
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[25%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[22%] p-4 font-medium text-gray-500">
                                 Service
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[8%] p-4 font-medium text-gray-500">
                                 Amount
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[15%] p-4 font-medium text-gray-500">
                                 Method
                             </th>
                             <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
@@ -56,7 +56,7 @@
                             <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
                                 Status
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[8%] p-4 font-medium text-gray-500">
                                 Action
                             </th>
                         </tr>
@@ -98,13 +98,13 @@
             let newRow = `
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 py-2 text-left">
                     <td class="hidden" id="invoiceId">${item['id']}</td>
-                    <td class="p-4 font-mono font-normal text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="invoiceNo">#${item['invoice_number']}</td>
-                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="clientName">${item['client']['fullname'].replace(/\b\w/g, char => char.toUpperCase())}</td>
-                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="serviceName">${item['service']['service_name']}</td>
+                    <td class="p-4 font-mono font-normal text-blue-900 border border-gray-300 whitespace-normal dark:text-white" id="invoiceNo"><a href="/invoice/${item['invoice_number']}" target="_blank">#${item['invoice_number']}</a></td>
+                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 break-words whitespace-normal dark:text-white" id="clientName">${item['client']['fullname'].replace(/\b\w/g, char => char.toUpperCase())}</td>
+                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 break-words whitespace-normal dark:text-white" id="serviceName">${item['service']['service_name']}</td>
                     <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="totalAmount">$${item['total_amount']}</td>
-                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="paymentMethod">${item['payment_method']['method_type'].replace(/\b\w/g, char => char.toUpperCase())}</td>
+                    <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 break-words whitespace-normal dark:text-white" id="paymentMethod">${item['payment_method']['method_type'].replace(/\b\w/g, char => char.toUpperCase())} - ${item['payment_method']['provider']}</td>
                     <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="dueDate">${item['due_date'].split(" ")[0]}</td>
-                    <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="status">
+                    <td class="p-4 font-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="status">
                         <label class="text-xs font-bold mr-2 px-2.5 py-0.5 rounded-md ${statusClasses[item['status']]}">${status[item['status']]}
                         </label>
                     </td>
