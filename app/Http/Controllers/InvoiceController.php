@@ -54,13 +54,31 @@ class InvoiceController extends Controller
 
     public function updateInvoice(Request $request)
     {
-        $invoice_number = $request->input('invoice_number');
-        $status = $request->input('status');
+        $cust_id = $request->header('id');
 
         try {
-            $updated = Invoice::where('invoice_number', $invoice_number)->update([
-                'status' => $status
+            $validatedData = $request->validate([
+                'client_id' => 'required|integer',
+                'invoice_number' => 'required|integer',
+                'service_id' => 'required|integer',
+                'quantity' => 'required|integer|min:1',
+                'unit_price' => 'required|numeric|min:0',
+                'issue_date' => 'required|date|before_or_equal:due_date',
+                'due_date' => 'required|date|after_or_equal:issue_date',
+                'amount' => 'required|numeric|min:0',
+                'tax' => 'required|numeric|min:0',
+                'total_amount' => 'required|numeric|min:0',
+                'status' => 'string|max:255',
+                'payment_method' => 'required|integer',
+                'notes' => 'nullable|string|max:255'
             ]);
+
+            $validatedData['cust_id'] = $cust_id;
+
+            $updated = Invoice::where('cust_id', $cust_id)
+                ->where('invoice_number', $request->input('invoice_number'))
+                ->update($validatedData);
+
             if ($updated) {
                 return response()->json([
                     'success' => true,
@@ -77,6 +95,49 @@ class InvoiceController extends Controller
                 'success' => false,
                 'message' => 'something went wrong!',
             ], 400);
+        }
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $request->validate([
+            'invoice_number' => 'required|integer|digits_between:1,8',
+            'status' => 'required|string|max:10'
+        ]);
+
+        $cust_id = $request->header('id');
+        $invoice_number = $request->input('invoice_number');
+        $status = $request->input('status');
+
+        if ($status === 'paid') {
+            return response()->json([
+                'success' => false,
+                'message' => "status can't be updated",
+            ], 400);
+        }
+
+        try {
+            $updated = Invoice::where('cust_id', $cust_id)
+                ->where('invoice_number', $invoice_number)
+                ->update(['status' => $status]);
+
+            if ($updated) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'status updated successfully',
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'failed to update the status',
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'something went wrong!',
+                // 'error' => $e->getMessage(),
+            ], 500);
         }
     }
 

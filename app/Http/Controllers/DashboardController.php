@@ -84,4 +84,32 @@ class DashboardController extends Controller
             return view('pages.invoices.create-invoice');
         }
     }
+
+    public function editInvoicePage(Request $request, $invoice_number)
+    {
+        $customer_id = $request->header('id');
+        try {
+            $customer = Customer::where('id', $customer_id)->first();
+            $invoice = Invoice::where('cust_id', $customer_id)
+                ->where('invoice_number', $invoice_number)
+                ->with([
+                    'customer' => function ($query) {
+                        $query->select('id', 'fullname');
+                    },
+                    'client' => function ($query) {
+                        $query->select('id', 'fullname', 'email', 'company', 'country');
+                    },
+                    'service' => function ($query) {
+                        $query->select('id', 'service_name');
+                    },
+                    'paymentMethod' => function ($query) {
+                        $query->select('id', 'method_type', 'provider', 'account_details');
+                    }
+                ])->first();
+                
+            return view('pages.invoices.edit-invoice', ['customer' => $customer, 'invoice' => $invoice]);
+        } catch (Exception $e) {
+            return view('pages.invoices.edit-invoice');
+        }
+    }
 }

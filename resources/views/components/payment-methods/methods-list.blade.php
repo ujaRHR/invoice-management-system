@@ -89,7 +89,7 @@
                     <td class="hidden p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="methodId">${item['id']}</td>
                     <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="methodType">${item['method_type'].replace(/\b\w/g, char => char.toUpperCase())}</td>
                     <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="methodProvider">${item['provider']}</td>
-                    <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="methodDetails">${item['account_details']}</td>
+                    <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-normal dark:text-white" id="methodDetails">${item['account_details']}</td>
                     <td class="p-4 text-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="methodDefault">${item['is_default']}</td>
                     <td class="p-4 space-x-2 whitespace-nowrap border border-gray-300">
                         <button type="button" data-modal-target="edit-method-modal" data-id="${item['id']}" data-modal-toggle="edit-method-modal" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">

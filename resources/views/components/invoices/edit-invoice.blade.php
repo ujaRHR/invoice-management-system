@@ -1,102 +1,337 @@
-<div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full" id="edit-method-modal">
-    <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
-            <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
-                <h3 class="text-xl font-semibold dark:text-white">
-                    Edit Method
-                </h3>
-                <button type="button" id="editBtnClose" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-toggle="edit-method-modal">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="p-6 space-y-6">
-                <form id="updateMethodForm">
-                    <input type="hidden" id="updateMethodId" value="">
-                    <div class="grid grid-cols-6 gap-6 mb-5">
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="method_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Method Type</label>
-                            <select name="method_type" id="updateMethodType" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                                <option value="bank">Bank</option>
-                                <option value="paypal">Paypal</option>
-                                <option value="crypto">Crypto</option>
-                                <option value="card">Card</option>
-                                <option value="others">Others</option>
-                            </select>
+<div class="p-3 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+    <div class="w-full mb-1">
+        <div class="mb-2">
+            <nav class="flex mb-3" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+                    <li class="inline-flex items-center">
+                        <a href="/dashboard" class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <a href="/invoices" class="ml-1 text-gray-500 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Invoices</a>
                         </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="provider" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provider</label>
-                            <input type="text" name="porvider" id="updateProvider" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Chase Bank, Bitcoin..." required>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <a href="#" class="ml-1 text-gray-500 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Edit Invoice</a>
                         </div>
-                    </div>
-                    <div class="grid grid-cols-6 gap-6">
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="account_details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">A/C Details</label>
-                            <textarea type="text" name="account_details" id="updateAccountDetails" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Account Number: 1234567890, Routing: 987654321" required></textarea>
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="is_default" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default?</label>
-                            <select name="is_default" id="updateDefault" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Update</button>
-                    </div>
-                </form>
-            </div>
+                    </li>
+                </ol>
+            </nav>
         </div>
     </div>
 </div>
 
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 p-10">
+    <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-5xl mx-auto space-y-6 mt-[-20px]">
+        <!-- Header Section -->
+        <header class="text-center border-b dark:border-gray-700 pb-4">
+            <img src="{{ asset('images/logo.svg') }}" alt="DySiQ Logo" class="w-25 h-25 mx-auto mb-2">
+        </header>
+
+        <form id="invoiceForm">
+            <!-- Invoice Details Section -->
+            <section class="space-y-4 pb-5">
+                <h3 class="text-base font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                        <g fill="#21a262">
+                            <path d="m12 2l.117.007a1 1 0 0 1 .876.876L13 3v4l.005.15a2 2 0 0 0 1.838 1.844L15 9h4l.117.007a1 1 0 0 1 .876.876L20 10v9a3 3 0 0 1-2.824 2.995L17 22H7a3 3 0 0 1-2.995-2.824L4 19V5a3 3 0 0 1 2.824-2.995L7 2zm4 15h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2m0-4H8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2M9 6H8a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2" />
+                            <path d="M19 7h-4l-.001-4.001z" />
+                        </g>
+                    </svg>
+                    <span class="text-lg">Invoice Details</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Invoice ID</label>
+                        <input type="text" id="invoiceNo" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $invoice->invoice_number }}" readonly>
+                    </div>
+                    <div class="relative max-w-sm">
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Issue Date</label>
+                        <div class="absolute top-[25px] bottom-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </div>
+                        <input id="issueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date" value="{{ explode(' ', $invoice->issue_date)[0] }}" required>
+                    </div>
+                    <div class="relative max-w-sm">
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Due Date</label>
+                        <div class="absolute top-[25px] bottom-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </div>
+                        <input id="dueDate" datepicker datepicker-autohide datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Select date" value="{{ explode(' ', $invoice->due_date)[0] }}" required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Client Information Section -->
+            <section class="space-y-4 pb-5">
+                <h3 class="text-base font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#21a262" fill-rule="evenodd" d="M8 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8m-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4zm7.25-2.095c.478-.86.75-1.85.75-2.905a6 6 0 0 0-.75-2.906a4 4 0 1 1 0 5.811M15.466 20c.34-.588.535-1.271.535-2v-1a5.98 5.98 0 0 0-1.528-4H18a4 4 0 0 1 4 4v1a2 2 0 0 1-2 2z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-lg">Client Information</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Select Client</label>
+                        <select id="clientsList" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="getClientInfo()" required>
+                            <option data-id="{{ $invoice->client->id }}" value="{{ $invoice->client->fullname }}">{{ $invoice->client->fullname }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Business Name</label>
+                        <input type="text" id="clientBusinessName" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly value="{{ $invoice->client->company }}" required>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Email</label>
+                        <input type="email" id="clientEmail" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly value="{{ $invoice->client->email }}" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Country</label>
+                        <input type="text" id="clientCountry" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly value="{{ $invoice->client->country }}" required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Service and Pricing Section -->
+            <section class="space-y-4 pb-5">
+                <h3 class="text-base font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#21a262" d="m8.8 10.95l2.15-2.175l-1.4-1.425l-.4.4q-.275.275-.687.288T7.75 7.75t-.3-.712t.3-.713l.375-.375L7 4.825L4.825 7zm8.2 8.225L19.175 17l-1.125-1.125l-.4.375q-.3.3-.7.3t-.7-.3t-.3-.7t.3-.7l.375-.4l-1.425-1.4l-2.15 2.15zm-.775-12.75l1.4 1.4l1.4-1.4L17.6 5zM4 21q-.425 0-.712-.288T3 20v-2.825q0-.2.075-.387t.225-.338l4.075-4.075L3.05 8.05Q2.625 7.625 2.625 7t.425-1.05l2.9-2.9q.425-.425 1.05-.412t1.05.437L12.4 7.4l3.775-3.8q.3-.3.675-.45t.775-.15t.775.15t.675.45L20.4 4.95q.3.3.45.675T21 6.4t-.15.763t-.45.662l-3.775 3.8l4.325 4.325q.425.425.425 1.05t-.425 1.05l-2.9 2.9q-.425.425-1.05.425t-1.05-.425l-4.325-4.325L7.55 20.7q-.15.15-.337.225T6.825 21z" />
+                    </svg>
+                    <span class="text-lg">Service and Pricing</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Select Service</label>
+                        <select id="servicesList" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="getServiceInfo()" required>
+                            <option data-id="{{ $invoice->service->id }}" value="{{ $invoice->service->service_name }}">{{ $invoice->service->service_name }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Unit Price</label>
+                        <input type="number" id="unitPrice" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" oninput="calculateTotal()" value="{{ $invoice->unit_price }}" required>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Quantity</label>
+                        <input type="number" id="quantity" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="1" min="1" max="5" oninput="calculateTotal()" value="{{ $invoice->quantity }}" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Tax (%)</label>
+                        <input type="number" id="tax" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" min="0" max="100" step="0.01" oninput="calculateTotal()" value="{{ number_format(($invoice->tax / $invoice->amount) * 100, 2) }}" required>
+                    </div>
+                </div>
+                <div class="text-xl font-bold text-gray-700 dark:text-gray-300 bg-green-100 dark:bg-green-900 p-4 rounded-lg flex justify-between">
+                    <span>Total:</span>
+                    <span id="grandTotal">${{ $invoice->total_amount }}</span>
+                </div>
+            </section>
+            <!-- Payment and Notes Section -->
+            <section class="space-y-4">
+                <h3 class="text-base font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#21a262" d="M14.356 2.595a.25.25 0 0 1 .361-.032l.922.812L12.739 7h1.92l2.106-2.632l1.652 1.457a.25.25 0 0 1 .026.348l-.69.827h1.944a1.75 1.75 0 0 0-.288-2.3l-3.7-3.263a1.75 1.75 0 0 0-2.531.23L8.976 7h1.91zM5.25 6.5a.75.75 0 0 0 0 1.5h13a3.25 3.25 0 0 1 3.25 3.25v6.5A3.25 3.25 0 0 1 18.25 21h-12A3.25 3.25 0 0 1 3 17.75V7.25A2.25 2.25 0 0 1 5.25 5h4.32L8.378 6.5zm10.25 8.25c0 .414.336.75.75.75h2a.75.75 0 0 0 0-1.5h-2a.75.75 0 0 0-.75.75" />
+                    </svg>
+                    <span class="text-lg">Payment and Notes</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Payment Method</label>
+                        <select id="methodsList" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="getMethodInfo()" required>
+                            <option data-id="{{ $invoice->paymentMethod->id }}" value="{{ $invoice->paymentMethod->provider }}">{{ ucwords($invoice->paymentMethod->method_type) }} - {{ $invoice->paymentMethod->provider }}</option>
+                        </select>
+
+                        <div class=" mt-2 p-3 bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-800 dark:text-red-300 rounded-lg flex items-start gap-2">
+                            <svg class="w-5 h-5 text-red-700 dark:text-red-300 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12 2a10 10 0 1 1-10 10A10 10 0 0 1 12 2Zm0 12.75a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0v-1.5a.75.75 0 0 0-.75-.75ZM12 6.75a.75.75 0 0 0-.75.75v4.5a.75.75 0 0 0 1.5 0v-4.5a.75.75 0 0 0-.75-.75Z" clip-rule="evenodd" />
+                            </svg>
+                            <p class="text-sm" id="methodInfo">
+                                {{ $invoice->paymentMethod->account_details }}
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Additional Notes</label>
+                        <textarea id="additionalNotes" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" rows="3">{{ $invoice->notes }}</textarea>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex justify-end">
+                <button class="px-6 py-3 bg-green-500 dark:bg-green-700 text-white text-lg font-semibold rounded-lg hover:bg-green-600 dark:hover:bg-green-800 transition duration-300 flex items-center gap-2" aria-label="Generate Invoice">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#ffffff" d="m23.5 17l-5 5l-3.5-3.5l1.5-1.5l2 2l3.5-3.5zM6 2c-1.11 0-2 .89-2 2v16c0 1.11.89 2 2 2h7.81c-.53-.91-.81-1.95-.81-3c0-3.31 2.69-6 6-6c.34 0 .67.03 1 .08V8l-6-6m-1 1.5L18.5 9H13Z" />
+                    </svg>
+                    Generate Invoice
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 @push('other-scripts')
 <script>
-    async function methodInfo() {
-        let methodId = $('#updateMethodId').val()
+    getClients()
+    getServices()
+    getMethods()
+
+    async function getClients() {
+        try {
+            let res = await axios.get('/get-clients');
+            let data = res.data.clients;
+
+            let clientsList = $('#clientsList');
+
+            data.forEach(function(item) {
+                let newOption = `<option data-id="${item['id']}" value="${item['fullname']}">${item['fullname']}</option>`;
+                clientsList.append(newOption);
+            });
+        } catch (error) {
+            console.error("Error fetching client info:", error);
+        }
+    }
+
+    async function getServices() {
+        try {
+            let res = await axios.get('/get-services');
+            let data = res.data.services;
+
+            let servicesList = $('#servicesList');
+
+            data.forEach(function(item) {
+                let newOption = `<option data-id="${item['id']}" value="${item['service_name']}">${item['service_name']}</option>`;
+                servicesList.append(newOption);
+            });
+        } catch (error) {
+            console.error("Error fetching service info:", error);
+        }
+    }
+
+    async function getMethods() {
+        try {
+            let res = await axios.get('/get-methods');
+            let data = res.data.methods;
+
+            let methodsList = $('#methodsList');
+
+            data.forEach(function(item) {
+                let newOption = `<option data-id="${item['id']}" value="${item['provider']}">${item['method_type'].charAt(0).toUpperCase() + item['method_type'].slice(1)} (${item['provider']})</option>`;
+                methodsList.append(newOption);
+            });
+        } catch (error) {
+            console.error("Error fetching method info:", error);
+        }
+    }
+
+    async function getClientInfo() {
+        let clientId = $('#clientsList').find(':selected').data('id');
+
+        axios.post('/client-info', {
+            id: clientId
+        }).then(function(response) {
+            $('#clientBusinessName').val(response.data.client.company)
+            $('#clientEmail').val(response.data.client.email)
+            $('#clientCountry').val(response.data.client.country)
+        })
+    }
+
+    async function getServiceInfo() {
+        let serviceId = $('#servicesList').find(':selected').data('id');
+
+        axios.post('/service-info', {
+            id: serviceId
+        }).then(function(response) {
+            $('#unitPrice').val(response.data.service.base_price)
+            calculateTotal()
+        })
+    }
+
+    async function getMethodInfo() {
+        let methodId = $('#methodsList').find(':selected').data('id');
 
         axios.post('/method-info', {
             id: methodId
         }).then(function(response) {
-            $('#updateMethodType').val(response.data.method.method_type)
-            $('#updateProvider').val(response.data.method.provider)
-            $('#updateAccountDetails').val(response.data.method.account_details)
-            $('#updateDefault').val(response.data.method.is_default)
+            $('#methodInfo').text(response.data.method.account_details)
         })
     }
 
-    async function updateMethod(event) {
+    async function calculateTotal() {
+        let unitPrice = parseFloat($('#unitPrice').val()) || 0;
+        let quantity = parseInt($('#quantity').val()) || 1;
+        let taxPercent = parseFloat($('#tax').val()) || 0;
+
+        let subtotal = unitPrice * quantity;
+        let taxAmount = (subtotal * taxPercent) / 100;
+        let total = subtotal + taxAmount;
+
+        $('#grandTotal').text(total.toFixed(2));
+    }
+
+    async function updateInvoice() {
         event.preventDefault();
 
+        let unitPrice = parseFloat($('#unitPrice').val());
+        let quantity = parseInt($('#quantity').val());
+        let taxPercent = parseFloat($('#tax').val());
+
+        let subtotal = unitPrice * quantity;
+        let taxAmount = (subtotal * taxPercent) / 100;
+        let total = subtotal + taxAmount;
+
+        let invoiceNumber = <?php echo $invoice->invoice_number ?>;
+
         const formData = {
-            id: parseInt($('#updateMethodId').val()),
-            method_type: $('#updateMethodType').val(),
-            provider: $('#updateProvider').val(),
-            account_details: $('#updateAccountDetails').val(),
-            is_default: $('#updateDefault').val()
+            'client_id': $('#clientsList').find(':selected').data('id'),
+            'invoice_number': invoiceNumber,
+            'service_id': $('#servicesList').find(':selected').data('id'),
+            'quantity': quantity,
+            'unit_price': unitPrice,
+            'issue_date': $('#issueDate').val(),
+            'due_date': $('#dueDate').val(),
+            'amount': subtotal,
+            'tax': taxPercent,
+            'total_amount': total,
+            'payment_method': $('#methodsList').find(':selected').data('id'),
+            'notes': $('#additionalNotes').val()
         };
 
         try {
-            const response = await axios.post('/update-method', formData);
+            const response = await axios.post('/update-invoice', formData);
 
             if (response.status === 200 && response.data.success === true) {
-                toastr.success("Payment Method updated successfully!");
-
-                const editModal = document.getElementById('edit-method-modal');
-                const editModalInstance = new Modal(editModal);
-                editModalInstance.hide();
-                $('[modal-backdrop]').remove();
-                getMethods();
+                toastr.success("Invoice updated successfully!");
+                setTimeout(() => {
+                    window.location.href = '/invoices';
+                }, 1000);
             } else {
                 toastr.error("Something went wrong, Try again!");
             }
         } catch (error) {
-            toastr.error("An error occurred while updating the method.");
+            toastr.error("An error occurred while updating the invoice.");
         }
     }
 
-    $('#updateMethodForm').on('submit', updateMethod);
+    $('#invoiceForm').on('submit', updateInvoice);
 </script>
 @endpush

@@ -41,7 +41,7 @@
             <div class="overflow-hidden shadow">
                 <table id="dataTable" class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                     <thead class="bg-[#f3f3fe] dark:bg-gray-700">
-                        <tr>
+                        <tr class="text-left">
                             <th scope="col" class="hidden border border-gray-300 p-4 font-medium text-gray-500 dark:text-gray-400">
                                 ID
                             </th>

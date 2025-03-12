@@ -40,6 +40,10 @@
             <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300">Client Information</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Client Name:</p>
+                    <p class="text-base font-medium text-gray-800 dark:text-gray-200">{{ $invoice->client->fullname }}</p>
+                </div>
+                <div>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Business Name:</p>
                     <p class="text-base font-medium text-gray-800 dark:text-gray-200">{{ $invoice->client->company }}</p>
                 </div>

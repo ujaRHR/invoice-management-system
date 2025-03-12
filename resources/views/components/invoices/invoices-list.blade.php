@@ -38,10 +38,10 @@
                             <th scope="col" class="border border-gray-300 w-[9%] p-4 font-medium text-gray-500">
                                 Invoice
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[18%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[17%] p-4 font-medium text-gray-500">
                                 Client Name
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[22%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[21%] p-4 font-medium text-gray-500">
                                 Service
                             </th>
                             <th scope="col" class="border border-gray-300 w-[8%] p-4 font-medium text-gray-500">
@@ -53,10 +53,10 @@
                             <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
                                 Due Date
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[10%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[9%] p-4 font-medium text-gray-500">
                                 Status
                             </th>
-                            <th scope="col" class="border border-gray-300 w-[8%] p-4 font-medium text-gray-500">
+                            <th scope="col" class="border border-gray-300 w-[11%] p-4 font-medium text-gray-500">
                                 Action
                             </th>
                         </tr>
@@ -105,16 +105,30 @@
                     <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 break-words whitespace-normal dark:text-white" id="paymentMethod">${item['payment_method']['method_type'].replace(/\b\w/g, char => char.toUpperCase())} - ${item['payment_method']['provider']}</td>
                     <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="dueDate">${item['due_date'].split(" ")[0]}</td>
                     <td class="p-4 font-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="status">
-                        <label class="text-xs font-bold mr-2 px-2.5 py-0.5 rounded-md ${statusClasses[item['status']]}">${status[item['status']]}
+                        <label class="text-xs font-bold mr-2 px-2.5 py-0.5 rounded-md ${statusClasses[item['status']]}">
+                            ${status[item['status']]}
                         </label>
                     </td>
                     
                     <td class="p-4 space-x-2 whitespace-nowrap border border-gray-300">
-                        <button type="button" data-modal-target="edit-invoice-modal" data-id="${item['id']}" data-modal-toggle="edit-invoice-modal" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-                                <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
-                            </svg>
+                        <button type="button" data-id="${item['id']}" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            <a href="/edit-invoice/${item['invoice_number']}">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
+                                    <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </button>
+                        <button type="button" data-id="${item['id']}" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-[#037138] hover:bg-[#037310] focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            <a href="/email-invoice/${item['invoice_number']}">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path fill="#fff" d="M12 11l-8 -5h16l-8 5Z" />
+                                    <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                    <path d="M4 5h16c0.55 0 1 0.45 1 1v12c0 0.55 -0.45 1 -1 1h-16c-0.55 0 -1 -0.45 -1 -1v-12c0 -0.55 0.45 -1 1 -1Z" />
+                                    <path d="M3 6.5l9 5.5l9 -5.5" />
+                                    </g>
+                                </svg>
+                            </a>
                         </button>
                         <button type="button" data-modal-target="delete-invoice-modal" data-id="${item['id']}" data-modal-toggle="delete-invoice-modal" class="deleteBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
