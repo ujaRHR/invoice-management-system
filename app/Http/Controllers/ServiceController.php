@@ -26,18 +26,18 @@ class ServiceController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'service created successfully',
-                ], 201);
+                ], 200);
             } else {
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to create new service',
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -68,7 +68,7 @@ class ServiceController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -94,7 +94,7 @@ class ServiceController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -115,13 +115,13 @@ class ServiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'No services were found'
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -142,13 +142,13 @@ class ServiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no service was found',
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 }

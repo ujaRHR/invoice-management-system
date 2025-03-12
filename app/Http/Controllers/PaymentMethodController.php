@@ -28,7 +28,7 @@ class PaymentMethodController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'payment method added successfully',
-                ], 201);
+                ], 200);
             } else {
                 return response()->json([
                     'success' => false,
@@ -39,7 +39,7 @@ class PaymentMethodController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -72,7 +72,7 @@ class PaymentMethodController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -98,7 +98,8 @@ class PaymentMethodController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -119,13 +120,13 @@ class PaymentMethodController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no payment methods found',
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -145,13 +146,13 @@ class PaymentMethodController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no payment method was found',
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong',
-            ], 400);
+            ], 500);
         }
     }
 }

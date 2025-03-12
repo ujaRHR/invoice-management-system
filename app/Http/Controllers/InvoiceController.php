@@ -42,13 +42,13 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to create the invoice',
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong!'
-            ], 400);
+            ], 500);
         }
     }
 
@@ -88,13 +88,13 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to update the invoice',
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong!',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -166,13 +166,13 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to delete the invoice',
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong!',
-            ], 400);
+            ], 500);
         }
     }
 
@@ -225,18 +225,18 @@ class InvoiceController extends Controller
                     'success' => true,
                     'message' => 'invoice fetched successfully',
                     'invoice' => $invoice
-                ]);
+                ],200);
             } else {
                 return response()->json([
                     'success' => false,
                     'message' => 'no invoice was found'
-                ]);
+                ],400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong!'
-            ]);
+            ],500);
         }
     }
 

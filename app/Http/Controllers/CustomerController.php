@@ -37,7 +37,7 @@ class CustomerController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong'
-            ], 400);
+            ], 500);
         }
     }
 
@@ -102,7 +102,7 @@ class CustomerController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong'
-            ], 400);
+            ], 500);
         }
     }
 }

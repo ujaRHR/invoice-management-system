@@ -39,7 +39,7 @@ class ClientController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong!'
-            ], 400);
+            ], 500);
         }
     }
 
@@ -72,7 +72,7 @@ class ClientController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong!'
-            ], 400);
+            ], 500);
         }
     }
 
@@ -98,7 +98,7 @@ class ClientController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong!'
-            ], 400);
+            ], 500);
         }
     }
 
@@ -114,18 +114,18 @@ class ClientController extends Controller
                     'success' => true,
                     'message' => 'clients fetched successfully',
                     'clients' => $clients
-                ]);
+                ],200);
             } else {
                 return response()->json([
                     'success' => false,
                     'message' => 'failed to fetch clients'
-                ]);
+                ],400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong'
-            ]);
+            ],500);
         }
     }
 
@@ -145,13 +145,13 @@ class ClientController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'no client was found'
-                ], 200);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong'
-            ], 400);
+            ], 500);
         }
     }
 }
