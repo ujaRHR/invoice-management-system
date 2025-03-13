@@ -73,7 +73,7 @@
         try {
             const response = await axios.post('/create-method', formData);
 
-            if (response.status === 201 && response.data.success === true) {
+            if (response.status === 200 && response.data.success === true) {
                 toastr.success("Payment method created successfully!");
                 $('#addMethodBtn').click()
                 const addModal = document.getElementById('add-method-modal');

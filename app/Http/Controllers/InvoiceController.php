@@ -155,7 +155,16 @@ class InvoiceController extends Controller
         $invoice_number = $request->input('invoice_number');
 
         try {
-            $deleted = Invoice::where('invoice_number', $invoice_number)->delete();
+            $invoice = Invoice::where('invoice_number', $invoice_number)->first();
+
+            if ($invoice->status === 'paid') {
+                return response()->json([
+                    'success' => false,
+                    'message' => "paid invoices can't be deleted",
+                ], 202);
+            }
+
+            $deleted = $invoice->delete();
 
             if ($deleted) {
                 return response()->json([
@@ -225,18 +234,18 @@ class InvoiceController extends Controller
                     'success' => true,
                     'message' => 'invoice fetched successfully',
                     'invoice' => $invoice
-                ],200);
+                ], 200);
             } else {
                 return response()->json([
                     'success' => false,
                     'message' => 'no invoice was found'
-                ],400);
+                ], 400);
             }
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'something went wrong!'
-            ],500);
+            ], 500);
         }
     }
 

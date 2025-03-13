@@ -4,5 +4,6 @@
 
 @section('content')
 @include('components.invoices.invoices-list')
+@include('components.invoices.update-status')
 @include('components.invoices.delete-invoice')
 @endsection
