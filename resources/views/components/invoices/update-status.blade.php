@@ -3,7 +3,7 @@
     <ul class="py-2 text-sm">
         <input type="hidden" id="invoiceNumber" value="">
         <li>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-700">✅ Completed</a>
+            <a href="#" onclick="updateStatus('paid')" class="block px-4 py-2 hover:bg-gray-700">✅ Completed</a>
         </li>
         <li>
             <a href="#" onclick="updateStatus('pending')" class="block px-4 py-2 hover:bg-gray-700">⏳ Pending</a>
@@ -16,8 +16,30 @@
 
 @push('other-scripts')
 <script>
-    function updateStatus(status) {
+    let statusDropdown = $('#update-status-dropdown');
 
+    async function updateStatus(status) {
+
+        let invoiceNumber = parseInt($('#invoiceNumber').val());
+
+        try {
+            const response = await axios.post('/update-status', {
+                invoice_number: invoiceNumber,
+                status: status
+            });
+
+            if (response.status === 200 && response.data.success === true) {
+                toastr.success("Status updated successfully!");
+                statusDropdown.hide();
+                getInvoices();
+            } else if (response.status === 202 && response.data.success === false) {
+                toastr.warning("Paid status can't be updated!");
+            } else {
+                toastr.error("Failed to update the status!");
+            }
+        } catch (error) {
+            toastr.error("An error occurred while updating the status.");
+        }
     }
 </script>
 @endpush

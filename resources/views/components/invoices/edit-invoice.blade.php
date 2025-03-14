@@ -320,7 +320,12 @@
             const response = await axios.post('/update-invoice', formData);
 
             if (response.status === 200 && response.data.success === true) {
-                toastr.success("Invoice updated successfully!");
+                toastr.success(`Invoice #${invoiceNumber} updated successfully!`);
+                setTimeout(() => {
+                    window.location.href = '/invoices';
+                }, 1000);
+            } else if (response.status === 202 && response.data.success === false) {
+                toastr.warning(`Paid invoice can't be updated!`);
                 setTimeout(() => {
                     window.location.href = '/invoices';
                 }, 1000);

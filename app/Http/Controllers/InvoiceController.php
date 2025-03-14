@@ -73,11 +73,26 @@ class InvoiceController extends Controller
                 'notes' => 'nullable|string|max:255'
             ]);
 
-            $validatedData['cust_id'] = $cust_id;
-
-            $updated = Invoice::where('cust_id', $cust_id)
+            $invoice = Invoice::where('cust_id', $cust_id)
                 ->where('invoice_number', $request->input('invoice_number'))
-                ->update($validatedData);
+                ->first();
+
+            if (!$invoice) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'invoice not found',
+                ], 404);
+            }
+
+            if ($invoice->status === 'paid') {
+                return response()->json([
+                    'success' => false,
+                    'message' => "paid invoices can't be updated",
+                ], 202);
+            }
+
+            $validatedData['cust_id'] = $cust_id;
+            $updated = $invoice->update($validatedData);
 
             if ($updated) {
                 return response()->json([
@@ -125,7 +140,7 @@ class InvoiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => "status can't be updated as it's already paid",
-                ], 400);
+                ], 202);
             }
 
             $updated = $invoice->update(['status' => $status]);
@@ -253,23 +268,19 @@ class InvoiceController extends Controller
     {
         try {
             $invoice = Invoice::where('invoice_number', $invoice_number)->with([
-                'customer' => function ($query) {
-                    $query->select('id', 'fullname');
-                },
-                'client' => function ($query) {
-                    $query->select('id', 'fullname', 'email', 'company', 'country');
-                },
-                'service' => function ($query) {
-                    $query->select('id', 'service_name');
-                },
-                'paymentMethod' => function ($query) {
-                    $query->select('id', 'method_type', 'provider', 'account_details');
-                }
+                'customer:id,fullname',
+                'client:id,fullname,email,company,country',
+                'service:id,service_name',
+                'paymentMethod:id,method_type,provider,account_details'
             ])->first();
+
+            if (!$invoice) {
+                return view('pages.404');
+            }
 
             return view('pages.invoices.share-invoice', ['invoice' => $invoice]);
         } catch (Exception $e) {
-            return response()->json(['invoice_number' => $invoice_number]);
+            return view('pages.404');
         }
     }
 }

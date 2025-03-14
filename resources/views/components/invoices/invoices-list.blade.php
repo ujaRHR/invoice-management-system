@@ -105,7 +105,7 @@
                     <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 break-words whitespace-normal dark:text-white" id="paymentMethod">${item['payment_method']['method_type'].replace(/\b\w/g, char => char.toUpperCase())} - ${item['payment_method']['provider']}</td>
                     <td class="p-4 font-mono font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="dueDate">${item['due_date'].split(" ")[0]}</td>
                     <td class="p-4 font-base font-medium text-gray-800 border border-gray-300 whitespace-nowrap dark:text-white" id="status">
-                        <label data-id="${item['invoice_number']}" data-dropdown-toggle="update-status-dropdown" data-dropdown-placement="left-end" class="text-xs font-bold mr-2 px-2.5 py-0.5 rounded-md ${statusClasses[item['status']]}">
+                        <label data-id="${item['invoice_number']}" data-dropdown-toggle="update-status-dropdown" data-dropdown-placement="left-end" class="updateStatus text-xs font-bold mr-2 px-2.5 py-0.5 rounded-md ${statusClasses[item['status']]}">
                             ${status[item['status']]}
                         </label>
                     </td>
@@ -149,6 +149,7 @@
         })
     }
 
+
     function initModals() {
         document.querySelectorAll('[data-modal-toggle]').forEach(button => {
             button.addEventListener('click', function() {
@@ -168,6 +169,7 @@
         $('.updateStatus').off('click').on('click', function() {
             let invoiceNumber = $(this).data('id');
             $('#invoiceNumber').val(invoiceNumber);
+            console.log(invoiceNumber)
         });
 
         $('.deleteBtn').off('click').on('click', function() {
