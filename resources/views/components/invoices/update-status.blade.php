@@ -36,14 +36,6 @@
 
 @push('other-scripts')
 <script>
-    async function closeModal() {
-        const statusModal = document.getElementById('status-update-modal');
-        const statusModalInstance = new Modal(statusModal);
-        statusModalInstance.hide();
-        $('[modal-backdrop]').remove();
-        getInvoices();
-    }
-
     async function updateStatus(status) {
         let invoiceNumber = parseInt($('#invoiceNumber').val());
 
@@ -55,17 +47,20 @@
 
             if (response.status === 200 && response.data.success === true) {
                 toastr.success("Status updated successfully!");
-                closeModal()
+                $('#modalCloseBtn').click()
+                $('[modal-backdrop]').remove();
+                getInvoices();
             } else if (response.status === 202 && response.data.success === false) {
                 toastr.warning("Paid status can't be updated!");
-                closeModal()
+                $('#modalCloseBtn').click()
+                $('[modal-backdrop]').remove();
             } else {
                 toastr.error("Something went wrong, Try again!");
-                closeModal()
+                $('#modalCloseBtn').click()
+                $('[modal-backdrop]').remove();
             }
         } catch (error) {
             toastr.error("An error occurred while updating the status.");
-            closeModal()
         }
     }
 </script>
