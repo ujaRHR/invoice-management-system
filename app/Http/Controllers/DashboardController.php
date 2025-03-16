@@ -18,7 +18,15 @@ class DashboardController extends Controller
 
         try {
             $customer = Customer::where('id', $customer_id)->first();
-            return view('pages.dashboard', ['customer' => $customer]);
+            $total_paid_invoices = Invoice::where('cust_id', $customer_id)
+                ->where('status', 'paid')
+                ->whereMonth('updated_at', now()->month)
+                ->whereYear('updated_at', now()->year)
+                ->sum('total_amount');
+            return view('pages.dashboard', [
+                'customer' => $customer,
+                'total_paid_invoices' => $total_paid_invoices
+            ]);
         } catch (Exception $e) {
             return view('pages.404');
         }
@@ -106,7 +114,7 @@ class DashboardController extends Controller
                         $query->select('id', 'method_type', 'provider', 'account_details');
                     }
                 ])->first();
-                
+
             return view('pages.invoices.edit-invoice', ['customer' => $customer, 'invoice' => $invoice]);
         } catch (Exception $e) {
             return view('pages.invoices.edit-invoice');
