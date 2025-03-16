@@ -20,7 +20,7 @@ class DashboardController extends Controller
             $customer = Customer::where('id', $customer_id)->first();
             return view('pages.dashboard', ['customer' => $customer]);
         } catch (Exception $e) {
-            return view('pages.dashboard');
+            return view('pages.404');
         }
     }
 

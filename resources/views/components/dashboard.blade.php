@@ -5,7 +5,7 @@
       <div class="flex items-center justify-between mb-4">
         <div class="flex-shrink-0">
           <span class="text-xl font-bold leading-none text-gray-900 sm:text-2xl dark:text-white">$45,385</span>
-          <h3 class="text-base font-light text-gray-500 dark:text-gray-400">Sales this week</h3>
+          <h3 class="text-base font-light text-gray-500 dark:text-gray-400">Sales this month</h3>
         </div>
         <div class="flex items-center justify-end flex-1 text-base font-medium text-green-500 dark:text-green-400">
           12.5%
@@ -89,10 +89,10 @@
       </div>
       <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
         <li class="w-full">
-          <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Top products</button>
+          <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Top Services</button>
         </li>
         <li class="w-full">
-          <button id="about-tab" data-tabs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false" class="inline-block w-full p-4 rounded-tr-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Top Customers</button>
+          <button id="about-tab" data-tabs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="false" class="inline-block w-full p-4 rounded-tr-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">Top Clients</button>
         </li>
       </ul>
       <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
