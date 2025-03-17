@@ -23,12 +23,28 @@ class DashboardController extends Controller
                 ->whereMonth('updated_at', now()->month)
                 ->whereYear('updated_at', now()->year)
                 ->sum('total_amount');
+
+            $top_services = Invoice::select('service_id', 'total_amount')
+                ->groupBy('service_id', 'total_amount')
+                ->orderByDesc('total_amount')
+                ->limit(10)
+                ->with([
+                    'service' => function ($query) {
+                        $query->select('id', 'service_name');
+                    }
+                ])
+                ->get();
+
             return view('pages.dashboard', [
                 'customer' => $customer,
-                'total_paid_invoices' => $total_paid_invoices
+                'total_paid_invoices' => $total_paid_invoices,
+                'top_services' => $top_services
             ]);
         } catch (Exception $e) {
-            return view('pages.404');
+            // return view('pages.404');
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 

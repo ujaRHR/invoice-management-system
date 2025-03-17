@@ -104,7 +104,7 @@
                   <img class="flex-shrink-0 w-10 h-10" src="/images/products/iphone.png" alt="imac image">
                   <div class="ml-3">
                     <p class="font-medium text-gray-900 truncate dark:text-white">
-                      iPhone 14 Pro
+                      {{ $top_services }}
                     </p>
                     <div class="flex items-center justify-end flex-1 text-sm text-green-500 dark:text-green-400">
                       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
