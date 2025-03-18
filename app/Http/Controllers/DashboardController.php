@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use App\Models\PaymentMethod;
 use App\Models\Service;
 use Exception;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -24,15 +25,11 @@ class DashboardController extends Controller
                 ->whereYear('updated_at', now()->year)
                 ->sum('total_amount');
 
-            $top_services = Invoice::select('service_id', 'total_amount')
-                ->groupBy('service_id', 'total_amount')
+            $top_services = Invoice::select('services.service_name', DB::raw('SUM(invoices.total_amount) as total_amount'))
+                ->join('services', 'invoices.service_id', '=', 'services.id')
+                ->groupBy('services.id', 'services.service_name')
                 ->orderByDesc('total_amount')
-                ->limit(10)
-                ->with([
-                    'service' => function ($query) {
-                        $query->select('id', 'service_name');
-                    }
-                ])
+                ->limit(5)
                 ->get();
 
             return view('pages.dashboard', [
