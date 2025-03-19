@@ -98,13 +98,14 @@
       <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
         <div class="hidden pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
           <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            @foreach ($top_services as $service)
             <li class="py-3 sm:py-4">
               <div class="flex items-center justify-between">
                 <div class="flex items-center min-w-0">
                   <img class="flex-shrink-0 w-10 h-10" src="/images/products/iphone.png" alt="imac image">
                   <div class="ml-3">
                     <p class="font-medium text-gray-900 truncate dark:text-white">
-                      {{ $top_services }}
+                      {{ $service->service_name }}
                     </p>
                     <div class="flex items-center justify-end flex-1 text-sm text-green-500 dark:text-green-400">
                       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -116,98 +117,11 @@
                   </div>
                 </div>
                 <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  $445,467
+                  {{ $service->total_amount }}
                 </div>
               </div>
             </li>
-            <li class="py-3 sm:py-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center min-w-0">
-                  <img class="flex-shrink-0 w-10 h-10" src="/images/products/imac.png" alt="imac image">
-                  <div class="ml-3">
-                    <p class="font-medium text-gray-900 truncate dark:text-white">
-                      Apple iMac 27"
-                    </p>
-                    <div class="flex items-center justify-end flex-1 text-sm text-green-500 dark:text-green-400">
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clip-rule="evenodd" fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                      </svg>
-                      12.5%
-                      <span class="ml-2 text-gray-500">vs last month</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  $256,982
-                </div>
-              </div>
-            </li>
-            <li class="py-3 sm:py-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center min-w-0">
-                  <img class="flex-shrink-0 w-10 h-10" src="/images/products/watch.png" alt="watch image">
-                  <div class="ml-3">
-                    <p class="font-medium text-gray-900 truncate dark:text-white">
-                      Apple Watch SE
-                    </p>
-                    <div class="flex items-center justify-end flex-1 text-sm text-red-600 dark:text-red-500">
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"></path>
-                      </svg>
-                      1.35%
-                      <span class="ml-2 text-gray-500">vs last month</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  $201,869
-                </div>
-              </div>
-            </li>
-            <li class="py-3 sm:py-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center min-w-0">
-                  <img class="flex-shrink-0 w-10 h-10" src="/images/products/ipad.png" alt="ipad image">
-                  <div class="ml-3">
-                    <p class="font-medium text-gray-900 truncate dark:text-white">
-                      Apple iPad Air
-                    </p>
-                    <div class="flex items-center justify-end flex-1 text-sm text-green-500 dark:text-green-400">
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clip-rule="evenodd" fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
-                      </svg>
-                      12.5%
-                      <span class="ml-2 text-gray-500">vs last month</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  $103,967
-                </div>
-              </div>
-            </li>
-            <li class="py-3 sm:py-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center min-w-0">
-                  <img class="flex-shrink-0 w-10 h-10" src="/images/products/imac.png" alt="imac image">
-                  <div class="ml-3">
-                    <p class="font-medium text-gray-900 truncate dark:text-white">
-                      Apple iMac 24"
-                    </p>
-                    <div class="flex items-center justify-end flex-1 text-sm text-red-600 dark:text-red-500">
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z"></path>
-                      </svg>
-                      2%
-                      <span class="ml-2 text-gray-500">vs last month</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  $98,543
-                </div>
-              </div>
-            </li>
+            @endforeach
           </ul>
         </div>
         <div class="hidden pt-4" id="about" role="tabpanel" aria-labelledby="about-tab">
