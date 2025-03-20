@@ -9,7 +9,7 @@ use App\Models\Invoice;
 use App\Models\PaymentMethod;
 use App\Models\Service;
 use Exception;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
