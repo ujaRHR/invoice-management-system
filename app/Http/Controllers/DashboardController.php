@@ -32,10 +32,18 @@ class DashboardController extends Controller
                 ->limit(5)
                 ->get();
 
+            $top_clients = Invoice::select('clients.fullname', 'clients.email', DB::raw('SUM(invoices.total_amount) as total_amount'))
+                ->join('clients', 'invoices.client_id', '=', 'clients.id')
+                ->groupBy('clients.id', 'clients.fullname')
+                ->orderByDesc('total_amount')
+                ->limit(5)
+                ->get();
+
             return view('pages.dashboard', [
                 'customer' => $customer,
                 'total_paid_invoices' => $total_paid_invoices,
-                'top_services' => $top_services
+                'top_services' => $top_services,
+                'top_clients' => $top_clients,
             ]);
         } catch (Exception $e) {
             // return view('pages.404');
