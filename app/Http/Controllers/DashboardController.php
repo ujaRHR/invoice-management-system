@@ -49,10 +49,10 @@ class DashboardController extends Controller
                 'clients' => $clients
             ]);
         } catch (Exception $e) {
-            // return view('pages.404');
-            return response()->json([
-                'error' => $e->getMessage()
-            ]);
+            return view('pages.404');
+            // return response()->json([
+            //     'error' => $e->getMessage()
+            // ]);
         }
     }
 
@@ -81,6 +81,7 @@ class DashboardController extends Controller
             return view('pages.services');
         }
     }
+
     public function paymentMethodsPage(Request $request)
     {
         $customer_id = $request->header('id');
@@ -142,6 +143,24 @@ class DashboardController extends Controller
             return view('pages.invoices.edit-invoice', ['customer' => $customer, 'invoice' => $invoice]);
         } catch (Exception $e) {
             return view('pages.invoices.edit-invoice');
+        }
+    }
+
+    public function customerProfile(Request $request)
+    {
+        $customer_id = $request->header('id');
+
+        try {
+            $customer = Customer::where('id', $customer_id)->first();
+
+            return view('pages.profile', [
+                'customer' => $customer,
+            ]);
+        } catch (Exception $e) {
+            return view('pages.404');
+            // return response()->json([
+            //     'error' => $e->getMessage()
+            // ]);
         }
     }
 }

@@ -44,6 +44,7 @@ Route::post('/update-status', [InvoiceController::class, 'updateStatus'])->middl
 Route::get('/dashboard', [DashboardController::class, 'dashboardPage'])->middleware('verify');
 Route::get('/clients', [DashboardController::class, 'clientPage'])->middleware('verify');
 Route::get('/services', [DashboardController::class, 'servicePage'])->middleware('verify');
+Route::get('/profile', [DashboardController::class, 'customerProfile'])->middleware('verify');
 Route::get('/payment-methods', [DashboardController::class, 'paymentMethodsPage'])->middleware('verify');
 Route::get('/invoices', [DashboardController::class, 'invoicePage'])->middleware('verify');
 Route::get('/create-invoice', [DashboardController::class, 'createInvoicePage'])->middleware('verify');

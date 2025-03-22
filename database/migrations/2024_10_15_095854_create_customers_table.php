@@ -18,11 +18,6 @@ return new class extends Migration
             $table->string('email', 255)->unique();
             $table->string('password', 255);
             $table->enum('user_type', ['individual', 'business']);
-            $table->string('phone', 15)->unique();
-            $table->string('address', 255);
-            $table->string('country', 255);
-            $table->string('language', 255);
-            $table->enum('is_verified', ['yes', 'no']);
             $table->string('password_reset_token', 255)->nullable();
             $table->timestamp('password_reset_expires')->nullable();
             $table->timestamps();
