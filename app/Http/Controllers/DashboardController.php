@@ -39,11 +39,14 @@ class DashboardController extends Controller
                 ->limit(5)
                 ->get();
 
+            $clients = Client::where('cust_id', $customer_id)->count();
+
             return view('pages.dashboard', [
                 'customer' => $customer,
                 'total_paid_invoices' => $total_paid_invoices,
                 'top_services' => $top_services,
                 'top_clients' => $top_clients,
+                'clients' => $clients
             ]);
         } catch (Exception $e) {
             // return view('pages.404');
