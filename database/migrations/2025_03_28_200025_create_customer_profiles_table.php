@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('language', 50)->nullable();
             $table->string('timezone', 100)->nullable();
             $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');
-            $table->boolean('verified')->default(false);
+            $table->boolean('is_verified')->default(false);
             $table->timestamps();
 
 
