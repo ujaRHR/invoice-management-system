@@ -27,6 +27,7 @@ class DashboardController extends Controller
 
             $top_services = Invoice::select('services.service_name', DB::raw('SUM(invoices.total_amount) as total_amount'))
                 ->join('services', 'invoices.service_id', '=', 'services.id')
+                ->where('status', 'paid')
                 ->groupBy('services.id', 'services.service_name')
                 ->orderByDesc('total_amount')
                 ->limit(5)
@@ -35,6 +36,7 @@ class DashboardController extends Controller
             $top_clients = Invoice::select('clients.fullname', 'clients.email', DB::raw('SUM(invoices.total_amount) as total_amount'))
                 ->join('clients', 'invoices.client_id', '=', 'clients.id')
                 ->groupBy('clients.id', 'clients.fullname')
+                ->where('status', 'paid')
                 ->orderByDesc('total_amount')
                 ->limit(5)
                 ->get();
