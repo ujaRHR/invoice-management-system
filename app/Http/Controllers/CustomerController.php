@@ -91,18 +91,14 @@ class CustomerController extends Controller
         }
     }
 
-    public function customerProfile(Request $request)
-    {
-        $cust_id = $request->header('id');
-    }
-
     public function getCustomer(Request $request)
     {
-        $cust_id = $request->input('cust_id');
+        $cust_id = $request->header('id');
 
         try {
-            $customer = Customer::select('username', 'fullname', 'email', 'user_type', 'phone', 'address', 'country', 'language', 'is_verified', 'created_at')
+            $customer = Customer::select('id', 'username', 'fullname', 'email', 'user_type')
                 ->where('id', $cust_id)
+                ->with('profile')
                 ->first();
 
             if ($customer) {

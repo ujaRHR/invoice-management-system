@@ -18,7 +18,10 @@ class DashboardController extends Controller
         $customer_id = $request->header('id');
 
         try {
-            $customer = Customer::where('id', $customer_id)->first();
+            $customer = Customer::where('id', $customer_id)
+                ->with('profile')
+                ->first();
+
             $total_paid_invoices = Invoice::where('cust_id', $customer_id)
                 ->where('status', 'paid')
                 ->whereMonth('updated_at', now()->month)

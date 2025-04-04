@@ -35,13 +35,18 @@
             <div class="flex items-center gap-4 mt-4">
                 <img src="{{ asset('images/demo_user.png') }}" alt="Profile Picture" class="w-16 h-16 rounded border border-gray-300">
                 <div>
+                    @if($customer->profile->is_verified)
                     <span class="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded">Verified</span>
+                    @else
+                    <span class="bg-red-200 text-red-800 text-xs font-semibold px-2 py-1 rounded">Not-Verified</span>
+                    @endif
                     <h2 class="text-xl font-semibold">{{ $customer->fullname }}</h2>
                     <p class="text-gray-500 text-sm">Web Developer</p>
+                    <p class="text-gray-500 text-sm">{{ '@'.$customer->username }}</p>
                 </div>
             </div>
             <div class="items-center pt-6 rounded-b dark:border-gray-700">
-                <button type="button" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit</button>
+                <button type="button" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Edit Picture</button>
             </div>
         </div>
 
@@ -55,7 +60,11 @@
                 <div>
                     <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                     <select id="country" name="country" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
-                        <option value="{{ $customer->country }}">{{ $customer->country }}</option>
+                        @if($customer->profile->country)
+                        <option selected value="{{ $customer->profile->country }}">{{ $customer->profile->country }}</option>
+                        @else
+                        <option selected disabled>Set Your Country</option>
+                        @endif
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Albania">Albania</option>
                         <option value="Algeria">Algeria</option>
