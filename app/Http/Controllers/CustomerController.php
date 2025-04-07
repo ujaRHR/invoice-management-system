@@ -120,4 +120,45 @@ class CustomerController extends Controller
             ], 500);
         }
     }
+
+    public function updateCustomerProfile(Request $request)
+    {
+        $cust_id = $request->header('id');
+
+        try {
+            $updateData = $request->only([
+                "profile_picture",
+                "bio",
+                "phone",
+                "gender",
+                "dob",
+                "address",
+                "country",
+                "website",
+                "linkedin",
+                "twitter",
+                "language",
+                "timezone",
+            ]);
+
+            $update = CustomerProfile::where('cust_id', $cust_id)->update($updateData);
+
+            if ($update) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'customer updated successfully'
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'failed to update the customer'
+                ], 400);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'something went wrong!',
+            ], 500);
+        }
+    }
 }
