@@ -54,19 +54,19 @@
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-800 dark:text-gray-300">Email</label>
-                    <input type="email" id="email" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $customer->email }}">
+                    <input type="email" id="email" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $customer->email }}" disabled>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
-                    <input type="text" id="phone" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="+1 678-548-2943">
+                    <input type="text" id="phone" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="+1 678-548-2943" value="{{ $customer->profile->phone }}">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date of birth</label>
-                    <input id="dob" datepicker datepicker-autohide datepicker-buttons datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="YYYY-MM-DD" required>
+                    <input id="dob" datepicker datepicker-autohide datepicker-buttons datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="YYYY-MM-DD" value="{{ $customer->profile->dob }}" required>
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
-                    <select class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <select id="gender" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         @if($customer->profile->gender)
                         <option selected value="{{ $customer->profile->gender }}">{{ ucfirst($customer->profile->gender) }}</option>
                         @else
@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="items-center pt-6 rounded-b dark:border-gray-700">
-                <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save</button>
+                <button type="submit" onclick="profileInfo()" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save</button>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
             <div class="grid grid-cols-3 gap-4">
                 <div>
                     <label for="home" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                    <input type="text" id="homeAddress" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="11923 NE Sumner St, NY" value="{{ $customer->profile->address }}">
+                    <input type="text" id="address" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="11923 NE Sumner St, NY" value="{{ $customer->profile->address }}">
                 </div>
                 <div>
                     <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
@@ -402,8 +402,8 @@
                     <input type="text" id="website" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="https://yourwebsite.com" value="{{ $customer->profile->website }}">
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Website</label>
-                    <input type="text" id="linkedin" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="https://linkedin.com/username" value="{{ $customer->profile->linkedin }}">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">LinkedIn</label>
+                    <input type="text" id="linkedin" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="https://linkedin.com/in/username" value="{{ $customer->profile->linkedin }}">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Twitter</label>
@@ -413,11 +413,11 @@
             <div class="grid grid-cols-1 gap-4 mt-4">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biography</label>
-                    <textarea id="bio" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="My name is Maria Chinn. I'm a writer specializing in informational content for marketing professionals... ... ..." value="{{ $customer->profile->bio }}"></textarea>
+                    <textarea id="bio" class="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="My name is Maria Chinn. I'm a writer specializing in informational content for marketing professionals... ... ...">{{ $customer->profile->bio }}</textarea>
                 </div>
             </div>
             <div class="items-center pt-6 rounded-b dark:border-gray-700">
-                <button type="submit" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save</button>
+                <button type="submit" onclick="personalInfo()" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save</button>
             </div>
         </div>
     </div>
@@ -431,27 +431,101 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                 <div>
                     <p class="text-sm font-semibold text-gray-700">Full name</p>
-                    <p class="text-gray-600">Joseph McFall</p>
+                    <p class="text-gray-600">{{ $customer->fullname }}</p>
                 </div>
                 <div>
                     <p class="text-sm font-semibold text-gray-700">Email Address</p>
-                    <p class="text-gray-600">helene@company.com</p>
+                    <p class="text-gray-600">{{ $customer->email }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Phone Number</p>
+                    <p class="text-gray-600">{{ $customer->profile->phone }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Date of Birth</p>
+                    <p class="text-gray-600">{{ $customer->profile->dob }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Gender</p>
+                    <p class="text-gray-600">{{ $customer->profile->gender }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Timezone</p>
+                    <p class="text-gray-600">{{ $customer->profile->timezone }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Address</p>
+                    <p class="text-gray-600">{{ $customer->profile->address }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Country</p>
+                    <p class="text-gray-600">{{ $customer->profile->country }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Website</p>
+                    <p class="text-gray-600">{{ $customer->profile->website }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Linkedin</p>
+                    <p class="text-gray-600"><a href="{{ $customer->profile->linkedin }}" target="_blank">{{ $customer->profile->linkedin }}</a></p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700">Twitter</p>
+                    <p class="text-gray-600"><a href="{{ $customer->profile->twitter }}" target="_blank">{{ $customer->profile->twitter }}</a></p>
                 </div>
                 <div>
                     <p class="text-sm font-semibold text-gray-700">Biography</p>
                     <p class="text-gray-600">
-                        I am a professional Web and Automation developer passionate about developing websites using modern technologies. With expertise in HTML, PHP, Laravel, Tailwind CSS, JavaScript, and WordPress, I specialize in building responsive, user-friendly websites.
+                        {{ $customer->profile->bio }}
                     </p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Home Address</p>
-                    <p class="text-gray-600">92 Miles Drive, Newark, NJ 07103, USA</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Phone Number</p>
-                    <p class="text-gray-600">+1234 567 890</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@push('other-scripts')
+<script>
+    async function profileInfo() {
+        let data = {
+            'phone': $('#phone').val(),
+            'dob': $('#dob').val(),
+            'gender': $('#gender').val(),
+        }
+
+        try {
+            const response = await axios.post('/update-customer', data);
+            if (response.status === 200 && response.data.success === true) {
+                toastr.success("Profile updated successfully!");
+            } else {
+                toastr.error("Something went wrong, Try again!");
+            }
+        } catch (error) {
+            toastr.error("An error occurred while updating the customer profile.");
+        }
+    }
+
+    async function personalInfo() {
+        let data = {
+            'address': $('#address').val(),
+            'country': $('#country').val(),
+            'timezone': $('#timezone').val(),
+            'website': $('#website').val(),
+            'linkedin': $('#linkedin').val(),
+            'twitter': $('#twitter').val(),
+            'bio': $('#bio').val(),
+        }
+
+        try {
+            const response = await axios.post('/update-customer', data);
+            if (response.status === 200 && response.data.success === true) {
+                toastr.success("Profile updated successfully!");
+            } else {
+                toastr.error("Something went wrong, Try again!");
+            }
+        } catch (error) {
+            toastr.error("An error occurred while updating the customer profile.");
+        }
+    }
+</script>
+@endpush

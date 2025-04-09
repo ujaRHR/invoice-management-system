@@ -126,20 +126,22 @@ class CustomerController extends Controller
         $cust_id = $request->header('id');
 
         try {
-            $updateData = $request->only([
-                "profile_picture",
-                "bio",
-                "phone",
-                "gender",
-                "dob",
-                "address",
-                "country",
-                "website",
-                "linkedin",
-                "twitter",
-                "language",
-                "timezone",
+            $validated = $request->validate([
+                'profile_picture' => 'nullable|string|max:255',
+                'bio'             => 'nullable|string|max:1000',
+                'phone'           => 'nullable|string|max:20',
+                'gender'          => 'nullable|in:male,female,other',
+                'dob'             => 'nullable|date|before:today',
+                'address'         => 'nullable|string|max:255',
+                'country'         => 'nullable|string|max:100',
+                'website'         => 'nullable|url|max:255',
+                'linkedin'        => 'nullable|url|max:255',
+                'twitter'         => 'nullable|url|max:255',
+                'language'        => 'nullable|string|max:50',
+                'timezone'        => 'nullable|string|max:100',
             ]);
+
+            $updateData = $request->only(array_keys($validated));
 
             $update = CustomerProfile::where('cust_id', $cust_id)->update($updateData);
 
