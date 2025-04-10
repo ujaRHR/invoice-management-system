@@ -33,7 +33,11 @@
                 Profile picture <span class="text-gray-400">&#9432;</span>
             </h3>
             <div class="flex items-center gap-4 mt-4">
+                @if($customer->profile->profile_picture)
+                <img id="user_image" src="{{ asset('uploads/customers/' . $customer->profile->profile_picture) }}" alt="Profile Picture" class="w-16 h-16 rounded border border-gray-300">
+                @else
                 <img src="{{ asset('images/demo_user.png') }}" alt="Profile Picture" class="w-16 h-16 rounded border border-gray-300">
+                @endif
                 <div>
                     @if($customer->profile->is_verified)
                     <span class="bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded">Verified</span>
@@ -45,7 +49,7 @@
                 </div>
             </div>
             <div class="items-center pt-6 rounded-b dark:border-gray-700">
-                <button type="button" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update Picture</button>
+                <button type="button" data-modal-target="upload-image-modal" data-modal-toggle="upload-image-modal" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Change Avatar</button>
             </div>
         </div>
 
@@ -484,8 +488,107 @@
     </div>
 </div>
 
+
+<!-- Upload Image Modal -->
+<div id="upload-image-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 items-center justify-center overflow-y-auto">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md relative dark:bg-gray-800">
+        <button type="button" class="absolute top-3 right-3 text-gray-400 hover:text-gray-900 dark:hover:text-white" data-modal-toggle="upload-image-modal" id="modalCloseBtn">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <div class="px-6 pt-6">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Upload Profile Picture</h3>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6 space-y-4">
+            <div class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                <p>• Max file size: <span class="font-medium">2 MB</span></p>
+                <p>• Accepted formats: <span class="font-medium">JPG, PNG, JPEG</span></p>
+                <p>• Please use a clear photo of yourself.</p>
+            </div>
+
+            <form id="uploadPhoto" enctype="multipart/form-data">
+                <input type="file" id="image_input" accept="image/png, image/jpeg, image/jpg" hidden>
+                <div class="flex items-center justify-center w-full mt-4">
+                    <label for="image_input"
+                        class="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 16V4m0 0l-4 4m4-4l4 4M17 8v12m0 0l-4-4m4 4l4-4"></path>
+                            </svg>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag & drop</p>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Image Preview -->
+                <div id="preview_container" class="mt-4 hidden">
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-1">Preview:</p>
+                    <img id="image_preview" src="" alt="Preview" class="w-32 h-32 rounded-full object-cover border shadow">
+                </div>
+            </form>
+        </div>
+
+        <div class="flex justify-end px-6 pb-6">
+            <button type="button" onclick="uploadPhoto()" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                Upload
+            </button>
+        </div>
+    </div>
+</div>
+
+
 @push('other-scripts')
 <script>
+    // Image preview
+    document.getElementById("image_input").addEventListener("change", function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const url = URL.createObjectURL(file);
+            const preview = document.getElementById("image_preview");
+            preview.src = url;
+            document.getElementById("preview_container").classList.remove("hidden");
+        }
+    });
+
+    async function uploadPhoto() {
+        const fileInput = document.getElementById('image_input');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            toastr.error("Please select an image to upload.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const response = await axios.post('/update-profile-picture', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            if (response.status === 200 && response.data.success === true) {
+                toastr.success("Avatar updated successfully!");
+                $('#user_image').attr('src', response.data.image_path);
+                $('#modalCloseBtn').click()
+            } else {
+                toastr.error("Something went wrong, Try again!");
+            }
+        } catch (error) {
+            toastr.error("An error occurred while updating the customer avatar.");
+            console.error(error);
+        }
+    }
+
+
     async function profileInfo() {
         let data = {
             'phone': $('#phone').val(),

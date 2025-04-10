@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\CustomerProfile;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use Illuminate\Support\Facades\File;
 use App\Helper\JWTToken;
 
 
@@ -156,6 +157,47 @@ class CustomerController extends Controller
                     'message' => 'failed to update the customer'
                 ], 400);
             }
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'something went wrong!',
+            ], 500);
+        }
+    }
+
+    public function updateProfilePicture(Request $request)
+    {
+        $cust_id = $request->header('id');
+
+        try {
+            $request->validate([
+                'image' => "required|image|mimes:jpeg,png,jpg|max:2048"
+            ]);
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time() * 4 . "." . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/customers'), $filename);
+            }
+
+            $customer = CustomerProfile::where('cust_id', $cust_id)->first();
+            $previous_avatar = $customer->profile_picture;
+            $previous_filepath = public_path('/uploads/customers/' . $previous_avatar);
+
+            // deleting previous file
+            if (File::exists($previous_filepath)) {
+                File::delete($previous_filepath);
+            }
+
+            $customer->update([
+                'profile_picture' => $filename
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'profile picture uploaded successfully',
+                'image_path' => asset('/uploads/customers/' . $filename)
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,

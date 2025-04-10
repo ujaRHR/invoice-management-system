@@ -15,6 +15,7 @@ Route::get('/login', [FrontendController::class, 'customerLoginPage']);
 Route::post('/customer-signup', [CustomerController::class, 'customerSignup']);
 Route::post('/customer-login', [CustomerController::class, 'customerLogin']);
 Route::post('/update-customer', [CustomerController::class, 'updateCustomerProfile'])->middleware('verify');
+Route::post('/update-profile-picture', [CustomerController::class, 'updateProfilePicture'])->middleware('verify');
 Route::get('/get-customer', [CustomerController::class, 'getCustomer'])->middleware('verify');
 
 Route::post('/create-client', [ClientController::class, 'createClient'])->middleware('verify');
