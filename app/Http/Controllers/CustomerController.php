@@ -205,4 +205,14 @@ class CustomerController extends Controller
             ], 500);
         }
     }
+
+    public function shareProfile(Request $request, $username)
+    {
+        $customer = Customer::where('username', $username)->with('profile')->first();
+        if (!$customer) {
+            return view('pages.404');
+        } else {
+            return view('pages.share-profile', ['customer' => $customer]);
+        }
+    }
 }

@@ -43,7 +43,7 @@
           <div>
             <a href="#" class="flex px-4 py-3 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
               <div class="flex-shrink-0">
-                <img class="rounded-full w-11 h-11" src="" alt="Jese image">
+                <img class="rounded-full w-11 h-11" src="" alt="Profile Logo">
                 <div class="absolute flex items-center justify-center w-5 h-5 ml-6 -mt-5 border border-white rounded-full bg-primary-700 dark:border-gray-700">
                   <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
@@ -212,7 +212,11 @@
           <div>
             <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
               <span class="sr-only">Open user menu</span>
-              <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+              @if($customer->profile->profile_picture)
+              <img class="w-8 h-8 rounded-full" src="{{ asset('uploads/customers/' . $customer->profile->profile_picture) }}" alt="user photo">
+              @else
+              <img class="w-8 h-8 rounded-full" src="{{ asset('images/demo_user.png') }}" alt="user photo">
+              @endif
             </button>
           </div>
 
