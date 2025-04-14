@@ -34,9 +34,9 @@
             </h3>
             <div class="flex items-center gap-4 mt-4">
                 @if($customer->profile->profile_picture)
-                <img id="user_image" src="{{ asset('uploads/customers/' . $customer->profile->profile_picture) }}" alt="Profile Picture" class="w-16 h-16 rounded border border-gray-300">
+                <img id="user_image" src="{{ asset('uploads/customers/' . $customer->profile->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded border border-gray-300">
                 @else
-                <img src="{{ asset('images/demo_user.png') }}" alt="Profile Picture" class="w-16 h-16 rounded border border-gray-300">
+                <img src="{{ asset('images/demo_user.png') }}" alt="Profile Picture" class="w-20 h-20 rounded border border-gray-300">
                 @endif
                 <div>
                     @if($customer->profile->is_verified)
@@ -422,67 +422,6 @@
             </div>
             <div class="items-center pt-6 rounded-b dark:border-gray-700">
                 <button type="submit" onclick="personalInfo()" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="max-w-5xl mx-auto grid grid-cols-1 mb-6 md:grid-cols-2 gap-6">
-        <!-- Personal Information Section -->
-        <div class="col-span-2 bg-white shadow-md rounded-xl p-6">
-            <h3 class="text-lg font-semibold text-gray-700 flex items-center gap-1">
-                Personal information <span class="text-gray-400">&#9432;</span>
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Full name</p>
-                    <p class="text-gray-600">{{ $customer->fullname }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Email Address</p>
-                    <p class="text-gray-600">{{ $customer->email }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Phone Number</p>
-                    <p class="text-gray-600">{{ $customer->profile->phone }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Date of Birth</p>
-                    <p class="text-gray-600">{{ $customer->profile->dob }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Gender</p>
-                    <p class="text-gray-600">{{ $customer->profile->gender }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Timezone</p>
-                    <p class="text-gray-600">{{ $customer->profile->timezone }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Address</p>
-                    <p class="text-gray-600">{{ $customer->profile->address }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Country</p>
-                    <p class="text-gray-600">{{ $customer->profile->country }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Website</p>
-                    <p class="text-gray-600">{{ $customer->profile->website }}</p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Linkedin</p>
-                    <p class="text-gray-600"><a href="{{ $customer->profile->linkedin }}" target="_blank">{{ $customer->profile->linkedin }}</a></p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Twitter</p>
-                    <p class="text-gray-600"><a href="{{ $customer->profile->twitter }}" target="_blank">{{ $customer->profile->twitter }}</a></p>
-                </div>
-                <div>
-                    <p class="text-sm font-semibold text-gray-700">Biography</p>
-                    <p class="text-gray-600">
-                        {{ $customer->profile->bio }}
-                    </p>
-                </div>
             </div>
         </div>
     </div>

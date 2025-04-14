@@ -212,7 +212,7 @@ class CustomerController extends Controller
         if (!$customer) {
             return view('pages.404');
         } else {
-            return view('pages.share-profile', ['customer' => $customer]);
+            return view('pages.profile.share-profile', ['customer' => $customer]);
         }
     }
 }

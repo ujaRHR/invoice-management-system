@@ -52,4 +52,4 @@ Route::get('/invoices', [DashboardController::class, 'invoicePage'])->middleware
 Route::get('/create-invoice', [DashboardController::class, 'createInvoicePage'])->middleware('verify');
 Route::get('/edit-invoice/{number}', [DashboardController::class, 'editInvoicePage'])->middleware('verify');
 Route::get('/invoice/{number}', [InvoiceController::class, 'shareInvoice']);
-Route::get('/{username}', [CustomerController::class, 'shareProfile']);
+Route::get('/profile/{username}', [CustomerController::class, 'shareProfile']);
