@@ -50,7 +50,18 @@
             </div>
             <div class="items-center pt-6 rounded-b dark:border-gray-700">
                 <button type="button" data-modal-target="upload-image-modal" data-modal-toggle="upload-image-modal" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Change Avatar</button>
-                <button type="button" class="font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">Share Profile</button>
+
+                <input type="text" id="share-profile" value="{{url('')}}/profile/{{ $customer->username }}" class="hidden" disabled readonly>
+                <button type="button" id="default-message" data-copy-to-clipboard-target="share-profile" class="font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                    <svg class="w-5 h-5 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path fill="#ffffff" d="M9.78 2.05a.5.5 0 0 1 .527.055l4.5 3.5a.5.5 0 0 1 .025.769l-4.5 4A.5.5 0 0 1 9.5 10V8.056c-.236.04-.544.11-.904.23c-.873.292-2.054.879-3.242 2.068a.5.5 0 0 1-.852-.4c.143-1.571.601-2.717 1.224-3.543a4.7 4.7 0 0 1 2.095-1.574A5.4 5.4 0 0 1 9.5 4.493V2.5a.5.5 0 0 1 .28-.45M2 5.5A2.5 2.5 0 0 1 4.5 3h2a.5.5 0 0 1 0 1h-2A1.5 1.5 0 0 0 3 5.5v6A1.5 1.5 0 0 0 4.5 13h6a1.5 1.5 0 0 0 1.5-1.5v-1a.5.5 0 0 1 1 0v1a2.5 2.5 0 0 1-2.5 2.5h-6A2.5 2.5 0 0 1 2 11.5z" />
+                    </svg> Share Profile
+                </button>
+                <button type="button" id="success-message" class="hidden font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white bg-green-600 hover:bg-green-700 focus:green-4 focus:ring-green-300 dark:focus:ring-green-900">
+                    <svg class="w-5 h-5 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="#ffffff" d="m10 17l-4-4l1.41-1.41L10 14.17l6.59-6.59L18 9m-6-6a1 1 0 0 1 1 1a1 1 0 0 1-1 1a1 1 0 0 1-1-1a1 1 0 0 1 1-1m7 0h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2" />
+                    </svg>
+                    Link Copied</button>
             </div>
         </div>
 
@@ -570,5 +581,22 @@
             toastr.error("An error occurred while updating the customer profile.");
         }
     }
+
+    $(document).ready(function() {
+        const defaultMessage = $('#default-message');
+        const successMessage = $('#success-message');
+
+        defaultMessage.click(function() {
+            const clipboard = $('#share-profile').val();
+            document.execCommand('copy');
+            defaultMessage.addClass('hidden');
+            successMessage.removeClass('hidden');
+
+            setTimeout(function() {
+                successMessage.addClass('hidden');
+                defaultMessage.removeClass('hidden');
+            }, 5000);
+        });
+    });
 </script>
 @endpush
