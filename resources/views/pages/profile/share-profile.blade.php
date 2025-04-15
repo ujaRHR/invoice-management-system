@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $customer->fullname }}'s Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 
 <body class="bg-gray-50 font-sans antialiased">
@@ -14,7 +14,7 @@
         <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
 
             <!-- Profile Header -->
-            <div class="relative h-48 bg-gradient-to-r from-blue-300 to-purple-600 flex items-center justify-center">
+            <div class="relative h-48 bg-gradient-to-r from-[#7badef] to-[#057e5b] flex items-center justify-center">
                 <img src="
                 @if($customer->profile->profile_picture)
                 {{ asset('uploads/customers/' . ($customer->profile->profile_picture)) }}
@@ -23,7 +23,7 @@
                 @endif
                 "
                     alt=" Profile Picture"
-                    class="w-32 h-32 rounded-full border-4 border-white shadow-lg absolute -bottom-16">
+                    class="w-32 h-32 rounded-full border-2 border-white shadow-lg absolute -bottom-16">
             </div>
 
             <!-- Profile Content -->
@@ -32,14 +32,25 @@
                 <div class="flex items-center justify-center space-x-1">
                     <h1 class="text-2xl font-bold text-gray-800">{{ $customer->fullname }}</h1>
                     @if($customer->profile->is_verified == 1)
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <svg data-tooltip-target="verified-tooltip" data-tooltip-trigger="hover" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path fill="#008c47" d="M12.65 3.797c.487.131.908.458 1.42.854l.297.23c.243.187.301.23.359.261a1 1 0 0 0 .196.081c.063.019.134.03.438.07l.373.047c.642.082 1.17.149 1.607.4c.383.22.7.537.92.92c.251.436.318.965.4 1.607l.048.373c.039.304.05.375.069.438q.03.102.08.196c.032.058.075.116.262.359l.23.297c.396.512.723.933.854 1.42a2.5 2.5 0 0 1 0 1.3c-.131.487-.458.908-.854 1.42l-.23.297c-.187.243-.23.301-.261.359q-.051.094-.081.196c-.019.063-.03.134-.07.438l-.047.373c-.082.642-.149 1.17-.4 1.607a2.5 2.5 0 0 1-.92.92c-.436.251-.965.318-1.607.4l-.373.048c-.304.039-.375.05-.438.069q-.102.03-.196.08c-.058.032-.116.075-.359.262l-.297.23c-.512.396-.933.723-1.42.854a2.5 2.5 0 0 1-1.3 0c-.487-.131-.908-.458-1.42-.854l-.297-.23c-.243-.187-.301-.23-.359-.261a1 1 0 0 0-.196-.081c-.063-.019-.134-.03-.438-.07l-.373-.047c-.642-.082-1.17-.149-1.607-.4a2.5 2.5 0 0 1-.92-.92c-.251-.436-.318-.965-.4-1.607l-.048-.373c-.039-.304-.05-.375-.069-.438a1 1 0 0 0-.08-.196c-.032-.058-.075-.116-.262-.359l-.23-.297c-.396-.512-.723-.933-.854-1.42a2.5 2.5 0 0 1 0-1.3c.131-.487.458-.908.854-1.42l.23-.297c.187-.243.23-.301.261-.359a1 1 0 0 0 .081-.196c.019-.063.03-.134.07-.438l.047-.373c.082-.642.149-1.17.4-1.607a2.5 2.5 0 0 1 .92-.92c.436-.251.965-.318 1.607-.4l.373-.048c.304-.039.375-.05.438-.069a1 1 0 0 0 .196-.08c.058-.032.116-.075.359-.262l.297-.23c.512-.396.933-.723 1.42-.854a2.5 2.5 0 0 1 1.3 0m3.057 5.496a1 1 0 0 0-1.414 0L11 12.586l-1.293-1.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0 0-1.414" />
                     </svg>
                     @else
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <svg data-tooltip-target="non-verified-tooltip" data-tooltip-trigger="hover" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path fill="#e31025" d="M8.15 21.75L6.7 19.3l-2.75-.6q-.375-.075-.6-.387t-.175-.688L3.45 14.8l-1.875-2.15q-.25-.275-.25-.65t.25-.65L3.45 9.2l-.3-3.25L2.1 4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l17 17q.275.275.275.7t-.275.7t-.7.275t-.7-.275L17 19.8l-1.15 1.95q-.2.325-.55.437t-.7-.037l-2.6-1.1l-2.6 1.1q-.35.15-.7.037t-.55-.437m12.4-6.95l.175 1.875q.05.35-.275.5t-.575-.1L14.65 11.85l1.25-1.25q.3-.3.288-.7t-.288-.7q-.3-.3-.712-.312t-.713.287l-1.25 1.25l-5.675-5.7q-.25-.25-.287-.575t.137-.625l.75-1.275q.2-.325.55-.437t.7.037l2.6 1.1l2.6-1.1q.35-.15.7-.038t.55.438L17.3 4.7l2.75.6q.375.075.6.388t.175.687L20.55 9.2l1.875 2.15q.25.275.25.65t-.25.65zM8.1 12.7l2.15 2.15q.3.3.7.3t.7-.3l.2-.2l-1.275-1.275L8.3 11.1l-.1.1l-.1.1q-.3.3-.3.7t.3.7" />
                     </svg>
                     @endif
+
+                    <div id="verified-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                        This user is verified through email and phone number.
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+
+                    <div id="non-verified-tooltip" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                        This user is not yet verified through email or phone.
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+
                 </div>
 
 

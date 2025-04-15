@@ -50,6 +50,7 @@
             </div>
             <div class="items-center pt-6 rounded-b dark:border-gray-700">
                 <button type="button" data-modal-target="upload-image-modal" data-modal-toggle="upload-image-modal" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Change Avatar</button>
+                <button type="button" class="font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">Share Profile</button>
             </div>
         </div>
 
