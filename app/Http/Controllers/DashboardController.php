@@ -22,11 +22,19 @@ class DashboardController extends Controller
                 ->with('profile')
                 ->first();
 
-            $total_paid_invoices = Invoice::where('cust_id', $customer_id)
+            $total_this_month = Invoice::where('cust_id', $customer_id)
                 ->where('status', 'paid')
                 ->whereMonth('updated_at', now()->month)
                 ->whereYear('updated_at', now()->year)
                 ->sum('total_amount');
+
+            $total_previous_month = Invoice::where('cust_id', $customer_id)
+                ->where('status', 'paid')
+                ->whereMonth('updated_at', (now()->month - 1))
+                ->whereYear('updated_at', now()->year)
+                ->sum('total_amount');
+
+            $monthly_change = round(((($total_this_month - $total_previous_month) / $total_previous_month) * 100), 2);
 
             $top_services = Invoice::select('services.service_name', DB::raw('SUM(invoices.total_amount) as total_amount'))
                 ->join('services', 'invoices.service_id', '=', 'services.id')
@@ -48,10 +56,11 @@ class DashboardController extends Controller
 
             return view('pages.dashboard', [
                 'customer' => $customer,
-                'total_paid_invoices' => $total_paid_invoices,
+                'total_this_month' => $total_this_month,
                 'top_services' => $top_services,
                 'top_clients' => $top_clients,
-                'clients' => $clients
+                'clients' => $clients,
+                'monthly_change' => $monthly_change
             ]);
         } catch (Exception $e) {
             return view('pages.404');
