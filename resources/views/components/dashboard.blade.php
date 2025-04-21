@@ -777,7 +777,7 @@
       },
     },
     xaxis: {
-      categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+      categories: [// Date Accessed from Axios],
       labels: {
         show: false,
       },
