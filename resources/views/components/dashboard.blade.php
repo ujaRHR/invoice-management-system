@@ -16,7 +16,9 @@
           </svg>
         </div>
       </div>
+
       <div id="main-chart"></div>
+
       <!-- Card Footer -->
       <div class="flex items-center justify-between pt-3 mt-4 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
         <div>
@@ -27,7 +29,7 @@
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="weekly-sales-dropdown">
             <div class="px-4 py-3" role="none">
               <p class="text-sm font-medium text-gray-900 truncate dark:text-white" role="none">
-                Sep 16, 2021 - Sep 22, 2021
+                Sep 16, 2024 - Sep 22, 2025
               </p>
             </div>
             <ul class="py-1" role="none">
@@ -61,7 +63,9 @@
           </a>
         </div>
       </div>
+
     </div>
+
     <!--Tabs widget -->
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
       <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">Statistics this month
@@ -262,6 +266,7 @@
     </div>
   </div>
 
+  <!-- Transaction History -->
   <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
     <!-- Card header -->
     <div class="items-center justify-between lg:flex">
@@ -709,4 +714,93 @@
       </div>
     </div>
   </div>
+
 </div>
+
+@push('other-scripts')
+<script>
+  const options = {
+    series: [{
+        name: "Developer Edition",
+        data: [1500, 1418, 1456, 1526, 1356, 1256],
+        color: "#1A56DB",
+      },
+      {
+        name: "Designer Edition",
+        data: [643, 413, 765, 412, 1423, 1731],
+        color: "#7E3BF2",
+      },
+    ],
+    chart: {
+      height: "100%",
+      maxWidth: "100%",
+      type: "area",
+      fontFamily: "Inter, sans-serif",
+      dropShadow: {
+        enabled: false,
+      },
+      toolbar: {
+        show: false,
+      },
+    },
+    tooltip: {
+      enabled: true,
+      x: {
+        show: false,
+      },
+    },
+    legend: {
+      show: false
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        opacityFrom: 0.55,
+        opacityTo: 0,
+        shade: "#1C64F2",
+        gradientToColors: ["#1C64F2"],
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      width: 6,
+    },
+    grid: {
+      show: false,
+      strokeDashArray: 4,
+      padding: {
+        left: 2,
+        right: 2,
+        top: 0
+      },
+    },
+    xaxis: {
+      categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+      labels: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+    },
+    yaxis: {
+      show: false,
+      labels: {
+        formatter: function(value) {
+          return '$' + value;
+        }
+      }
+    },
+  }
+
+  if (document.getElementById("main-chart") && typeof ApexCharts !== 'undefined') {
+    const chart = new ApexCharts(document.getElementById("main-chart"), options);
+    chart.render();
+  }
+</script>
+@endpush

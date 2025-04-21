@@ -13,7 +13,11 @@
         <!-- Header Section -->
         <header class="text-center border-b border-gray-200 dark:border-gray-700 pb-6">
             <img src="{{ asset('images/logo.svg') }}" alt="DySiQ Logo" class="w-25 h-25 mx-auto mb-4">
-            <p class="text-lg text-gray-600 dark:text-gray-300">From {{ $invoice->customer->fullname }}</p>
+            <p class="text-lg text-gray-600 dark:text-gray-300">From
+                <a href="{{ url()->to('') }}/profile/{{ $invoice->customer->username }}" target="_blank">
+                    {{ $invoice->customer->fullname }}
+                </a>
+            </p>
         </header>
 
         <!-- Invoice Details Section -->

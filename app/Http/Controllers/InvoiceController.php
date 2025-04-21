@@ -268,7 +268,7 @@ class InvoiceController extends Controller
     {
         try {
             $invoice = Invoice::where('invoice_number', $invoice_number)->with([
-                'customer:id,fullname',
+                'customer:id,username,fullname',
                 'client:id,fullname,email,company,country',
                 'service:id,service_name',
                 'paymentMethod:id,method_type,provider,account_details'

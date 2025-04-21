@@ -42,7 +42,6 @@
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/sidebar.min.js') }}"></script>
     <script src="{{ asset('js/buttons.js') }}"></script>
-    <script src="{{ asset('js/app.bundle.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.js') }}"></script>
 
