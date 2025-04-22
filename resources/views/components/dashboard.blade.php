@@ -721,12 +721,12 @@
 <script>
   const options = {
     series: [{
-        name: "Developer Edition",
+        name: "Revenue",
         data: [1500, 1418, 1456, 1526, 1356, 1256],
         color: "#1A56DB",
       },
       {
-        name: "Designer Edition",
+        name: "Revenue (previous period)",
         data: [643, 413, 765, 412, 1423, 1731],
         color: "#7E3BF2",
       },
@@ -777,7 +777,7 @@
       },
     },
     xaxis: {
-      categories: [// Date Accessed from Axios],
+      categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
       labels: {
         show: false,
       },
