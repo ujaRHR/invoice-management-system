@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div id="main-chart"></div>
+      <div id="main-chart" class="w-full"></div>
 
       <!-- Card Footer -->
       <div class="flex items-center justify-between pt-3 mt-4 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
@@ -719,6 +719,11 @@
 
 @push('other-scripts')
 <script>
+  const dailyRevenue = <?php echo json_encode($daily_revenue) ?>;
+  const previousRevenue = <?php echo json_encode($previous_revenue) ?>;
+
+  console.log(dailyRevenue, previousRevenue)
+
   const options = {
     series: [{
         name: "Revenue",
@@ -726,7 +731,7 @@
         color: "#1A56DB",
       },
       {
-        name: "Revenue (previous period)",
+        name: "Revenue (previous)",
         data: [643, 413, 765, 412, 1423, 1731],
         color: "#7E3BF2",
       },
@@ -798,9 +803,9 @@
     },
   }
 
-  if (document.getElementById("main-chart") && typeof ApexCharts !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function() {
     const chart = new ApexCharts(document.getElementById("main-chart"), options);
     chart.render();
-  }
+  })
 </script>
 @endpush

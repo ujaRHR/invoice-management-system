@@ -34,6 +34,21 @@ class DashboardController extends Controller
                 ->whereYear('updated_at', now()->year)
                 ->sum('total_amount');
 
+            $daily_revenue = Invoice::where('cust_id', $customer_id)
+                ->select('total_amount', 'updated_at')
+                ->where('status', 'paid')
+                ->whereMonth('updated_at', now()->month)
+                ->whereYear('updated_at', now()->year)
+                ->get();
+
+            $previous_revenue = Invoice::where('cust_id', $customer_id)
+                ->select('total_amount', 'updated_at')
+                ->select('total_amount')
+                ->where('status', 'paid')
+                ->whereMonth('updated_at', (now()->month - 1))
+                ->whereYear('updated_at', now()->year)
+                ->get();
+
             $monthly_change = round(((($total_this_month - $total_previous_month) / $total_previous_month) * 100), 2);
 
             $top_services = Invoice::select('services.service_name', DB::raw('SUM(invoices.total_amount) as total_amount'))
@@ -60,7 +75,9 @@ class DashboardController extends Controller
                 'top_services' => $top_services,
                 'top_clients' => $top_clients,
                 'clients' => $clients,
-                'monthly_change' => $monthly_change
+                'monthly_change' => $monthly_change,
+                'daily_revenue' => $daily_revenue,
+                'previous_revenue' => $previous_revenue,
             ]);
         } catch (Exception $e) {
             return view('pages.404');
