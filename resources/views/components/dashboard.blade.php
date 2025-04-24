@@ -4,7 +4,7 @@
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
       <div class="flex items-center justify-between mb-4">
         <div class="flex-shrink-0">
-          <span class="text-xl font-bold leading-none text-gray-900 sm:text-2xl dark:text-white">${{ $total_this_month }}</span>
+          <span class="text-xl font-bold leading-none text-gray-900 sm:text-2xl dark:text-white">${{ round($total_this_month, 0) }}</span>
           <h3 class="text-base font-light text-gray-500 dark:text-gray-400">Sales this month</h3>
         </div>
         <div class="flex items-center justify-end flex-1 text-base font-medium text-green-500 dark:text-green-400">
@@ -719,89 +719,123 @@
 
 @push('other-scripts')
 <script>
-  const dailyRevenue = <?php echo json_encode($daily_revenue) ?>;
-  const previousRevenue = <?php echo json_encode($previous_revenue) ?>;
+  const currentRevenue = <?php echo json_encode($current_revenue); ?>;
+  const previousRevenue = <?php echo json_encode($previous_revenue); ?>;
 
-  console.log(dailyRevenue, previousRevenue)
+  function groupRevenueByDay(data) {
+    const grouped = {};
+    data.forEach(item => {
+      const day = new Date(item.updated_at).getDate();
+      if (!grouped[day]) {
+        grouped[day] = 0;
+      }
+      grouped[day] += parseFloat(item.total_amount);
+    });
+    return grouped;
+  }
 
+  const groupedCurrent = groupRevenueByDay(currentRevenue);
+  const groupedPrevious = groupRevenueByDay(previousRevenue);
+
+  const buckets = [
+    [1, 5],
+    [4, 6],
+    [7, 9],
+    [10, 12],
+    [13, 15],
+    [16, 18],
+    [19, 21],
+    [22, 24],
+    [25, 27],
+    [28, 31]
+  ];
+
+  const bucketLabels = buckets.map(([start, end]) => `${start}-${end}`);
+  const sumBucket = (data, start, end) => {
+    let total = 0;
+    for (let i = start; i <= end; i++) {
+      total += data[i] || 0;
+    }
+    return total;
+  };
+
+  const currentAmounts = buckets.map(([start, end]) => sumBucket(groupedCurrent, start, end));
+  const previousAmounts = buckets.map(([start, end]) => sumBucket(groupedPrevious, start, end));
+  
   const options = {
-    series: [{
-        name: "Revenue",
-        data: [1500, 1418, 1456, 1526, 1356, 1256],
-        color: "#1A56DB",
-      },
-      {
-        name: "Revenue (previous)",
-        data: [643, 413, 765, 412, 1423, 1731],
-        color: "#7E3BF2",
-      },
-    ],
     chart: {
-      height: "100%",
-      maxWidth: "100%",
+      width: "100%",
+      height: 400,
       type: "area",
       fontFamily: "Inter, sans-serif",
       dropShadow: {
-        enabled: false,
+        enabled: false
       },
       toolbar: {
-        show: false,
-      },
+        show: false
+      }
     },
     tooltip: {
       enabled: true,
       x: {
-        show: false,
-      },
-    },
-    legend: {
-      show: false
-    },
-    fill: {
-      type: "gradient",
-      gradient: {
-        opacityFrom: 0.55,
-        opacityTo: 0,
-        shade: "#1C64F2",
-        gradientToColors: ["#1C64F2"],
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      width: 6,
-    },
-    grid: {
-      show: false,
-      strokeDashArray: 4,
-      padding: {
-        left: 2,
-        right: 2,
-        top: 0
-      },
-    },
-    xaxis: {
-      categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
-      labels: {
-        show: false,
-      },
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
-        show: false,
-      },
-    },
-    yaxis: {
-      show: false,
-      labels: {
-        formatter: function(value) {
-          return '$' + value;
-        }
+        show: true,
+        formatter: (val, opts) => bucketLabels[opts.dataPointIndex]
       }
     },
-  }
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      width: 4,
+      curve: 'smooth'
+    },
+    grid: {
+      show: true,
+      strokeDashArray: 4,
+      padding: {
+        top: -23
+      }
+    },
+    series: [{
+        name: "Revenue",
+        data: currentAmounts,
+        color: "#fcbf86"
+      },
+      {
+        name: "Revenue (previous)",
+        data: previousAmounts,
+        color: "#5800e0"
+      }
+    ],
+    xaxis: {
+      categories: bucketLabels,
+      labels: {
+        show: true,
+        style: {
+          fontFamily: "Inter, sans-serif",
+          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+        }
+      },
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false
+      }
+    },
+    yaxis: {
+      categories: bucketLabels,
+      labels: {
+        show: true,
+        style: {
+          fontFamily: "Inter, sans-serif",
+          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+        }
+      },
+    }
+  };
+
+
 
   document.addEventListener('DOMContentLoaded', function() {
     const chart = new ApexCharts(document.getElementById("main-chart"), options);
