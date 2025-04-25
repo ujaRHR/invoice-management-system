@@ -118,7 +118,7 @@
                   </div>
                 </div>
                 <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  {{ $service->total_amount }}
+                  ${{ round($service->total_amount,0) }}
                 </div>
               </div>
             </li>
@@ -147,7 +147,7 @@
                   </p>
                 </div>
                 <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                  {{ $client->total_amount }}
+                  ${{ round($client->total_amount,0) }}
                 </div>
               </div>
             </li>
@@ -761,7 +761,7 @@
 
   const currentAmounts = buckets.map(([start, end]) => sumBucket(groupedCurrent, start, end));
   const previousAmounts = buckets.map(([start, end]) => sumBucket(groupedPrevious, start, end));
-  
+
   const options = {
     chart: {
       width: "100%",
@@ -779,14 +779,14 @@
       enabled: true,
       x: {
         show: true,
-        formatter: (val, opts) => bucketLabels[opts.dataPointIndex]
+        formatter: (val, opts) => `Day ${bucketLabels[opts.dataPointIndex]}`
       }
     },
     dataLabels: {
       enabled: false
     },
     stroke: {
-      width: 4,
+      width: 5,
       curve: 'smooth'
     },
     grid: {
@@ -799,12 +799,12 @@
     series: [{
         name: "Revenue",
         data: currentAmounts,
-        color: "#fcbf86"
+        color: "#3eaa61"
       },
       {
-        name: "Revenue (previous)",
+        name: "Revenue (previous month)",
         data: previousAmounts,
-        color: "#5800e0"
+        color: "#e02e30"
       }
     ],
     xaxis: {
@@ -824,18 +824,15 @@
       }
     },
     yaxis: {
-      categories: bucketLabels,
       labels: {
-        show: true,
+        formatter: val => `$${parseInt(val)}`,
         style: {
           fontFamily: "Inter, sans-serif",
           cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
         }
-      },
+      }
     }
   };
-
-
 
   document.addEventListener('DOMContentLoaded', function() {
     const chart = new ApexCharts(document.getElementById("main-chart"), options);
