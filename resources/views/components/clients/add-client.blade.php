@@ -196,7 +196,7 @@
                     </div>
 
                     <div class="items-center pt-6 rounded-b dark:border-gray-700">
-                        <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Add client</button>
+                        <button class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#008443] hover:bg-[#005a2e] focus:ring-4 focus:ring-[#12bb5dd6] dark:bg-[#008443] dark:hover:bg-[#008443] dark:focus:ring-[#12bb5dd6]" type="submit">Add Client</button>
                     </div>
                 </form>
             </div>

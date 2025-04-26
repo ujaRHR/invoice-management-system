@@ -738,16 +738,14 @@
   const groupedPrevious = groupRevenueByDay(previousRevenue);
 
   const buckets = [
-    [1, 5],
-    [4, 6],
-    [7, 9],
-    [10, 12],
-    [13, 15],
-    [16, 18],
-    [19, 21],
-    [22, 24],
-    [25, 27],
-    [28, 31]
+    [1, 4],
+    [5, 8],
+    [9, 12],
+    [13, 16],
+    [17, 20],
+    [21, 24],
+    [25, 28],
+    [29, 31]
   ];
 
   const bucketLabels = buckets.map(([start, end]) => `${start}-${end}`);
@@ -764,7 +762,6 @@
 
   const options = {
     chart: {
-      width: "100%",
       height: 400,
       type: "area",
       fontFamily: "Inter, sans-serif",
@@ -797,7 +794,7 @@
       }
     },
     series: [{
-        name: "Revenue",
+        name: "Revenue (current month)",
         data: currentAmounts,
         color: "#3eaa61"
       },
@@ -811,10 +808,11 @@
       categories: bucketLabels,
       labels: {
         show: true,
+        formatter: val => `Day ${val}`,
         style: {
           fontFamily: "Inter, sans-serif",
           cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-        }
+        },
       },
       axisBorder: {
         show: false

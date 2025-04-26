@@ -111,7 +111,7 @@
                     </td>
                     
                     <td class="p-4 space-x-2 whitespace-nowrap border border-gray-300">
-                        <button type="button" data-id="${item['id']}" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <button type="button" data-id="${item['id']}" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-[#008443] hover:bg-[#005a2e] focus:ring-4 focus:ring-[#12bb5dd6] dark:bg-[#008443] dark:hover:bg-[#008443] dark:focus:ring-[#12bb5dd6]">
                             <a href="/edit-invoice/${item['invoice_number']}">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
@@ -119,7 +119,7 @@
                                 </svg>
                             </a>
                         </button>
-                        <button type="button" data-id="${item['id']}" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-[#037138] hover:bg-[#037310] focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <button type="button" data-id="${item['id']}" class="editBtn inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white rounded-lg bg-[#3c485f] hover:bg-[#3c488f] focus:ring-4 focus:ring-[#3c485fac] dark:bg-[#3c485f] dark:hover:bg-[#3c488f] dark:focus:ring-[#3c485fac]">
                             <a href="/email-invoice/${item['invoice_number']}">
                                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path fill="#fff" d="M12 11l-8 -5h16l-8 5Z" />
