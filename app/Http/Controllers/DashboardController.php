@@ -193,4 +193,15 @@ class DashboardController extends Controller
             // ]);
         }
     }
+
+    public function exportPage(Request $request)
+    {
+        $customer_id = $request->header('id');
+        try {
+            $customer = Customer::where('id', $customer_id)->first();
+            return view('pages.export', ['customer' => $customer]);
+        } catch (Exception $e) {
+            return view('pages.export');
+        }
+    }
 }
