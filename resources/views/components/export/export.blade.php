@@ -30,10 +30,9 @@
 
     <div class="flex flex-col gap-6">
         <div class="relative">
-            <!-- Dropdown with Icon -->
             <div class="col-span-6 sm:col-span-3">
-                <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
-                <select id="addCountry" name="country" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                <select id="exportData" name="exportData" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                    <option selected disabled>Select Data</option>
                     <option value="invoices">Invoices</option>
                     <option value="clients">Clients</option>
                     <option value="services">Services</option>
@@ -41,8 +40,7 @@
             </div>
         </div>
 
-        <!-- Export Button with Download Icon -->
-        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition duration-300">
+        <button id="exportBtn" onclick="exportData()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition duration-300">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12v8m0 0l-3-3m3 3l3-3m0-12H9m12 0a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V5z" />
             </svg>
@@ -55,5 +53,15 @@
 
 @push('other-scripts')
 <script>
+    function exportData() {
+        let selectedData = $('#exportData').val();
+
+        axios.post('/export', {
+            'data_type': selectedData,
+            headers: {
+                'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            },
+        })
+    }
 </script>
 @endpush

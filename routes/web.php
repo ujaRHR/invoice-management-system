@@ -8,6 +8,7 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ExportController;
 
 
 Route::get('/login', [FrontendController::class, 'customerLoginPage']);
@@ -54,3 +55,4 @@ Route::get('/edit-invoice/{number}', [DashboardController::class, 'editInvoicePa
 Route::get('/invoice/{number}', [InvoiceController::class, 'shareInvoice']);
 Route::get('/profile/{username}', [CustomerController::class, 'shareProfile']);
 Route::get('/export', [DashboardController::class, 'exportPage'])->middleware('verify');
+Route::post('/export', [ExportController::class, 'export'])->middleware('verify');
